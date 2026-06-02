@@ -1,0 +1,17 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# OS and editor
+.DS_Store
+Thumbs.db
+
+# Dependencies (if added later)
+node_modules/
+
+# Keys and credentials
+*.pem
+*.p12
+*-credentials.json
+service-account*.json

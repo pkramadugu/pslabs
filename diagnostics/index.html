@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PSLabs Diagnostics | Book Tests at Home</title>
+    <meta
+      name="description"
+      content="Search diagnostics packages, profiles, and tests. Check pincode serviceability and book at-home sample collection through PSLabs."
+    />
+    <meta name="theme-color" content="#fff6fb" />
+    <link rel="canonical" href="https://pslabs.in/diagnostics/" />
+    <meta property="og:title" content="PSLabs Diagnostics" />
+    <meta property="og:description" content="At-home diagnostics test booking with serviceability, cart, slots, and order confirmation." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pslabs.in/diagnostics/" />
+    <meta property="og:image" content="https://pslabs.in/diagnostics/assets/diagnostics-hero.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="/" aria-label="PSLabs home">
+        <span class="brand-mark">PS</span>
+        <span>
+          <strong>PSLabs Diagnostics</strong>
+          <small>At-home test booking</small>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" data-nav-toggle aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" data-nav>
+        <a href="/">PSLabs</a>
+        <a href="#catalog">Tests</a>
+        <a href="#checkout">Cart</a>
+        <a href="/skincare/">Skincare</a>
+        <a class="nav-cta" href="#catalog">Book Now</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="booking-hero" id="catalog">
+        <img class="hero-image" src="assets/diagnostics-hero.png" alt="At-home diagnostics consultation before sample collection" />
+        <div class="hero-overlay"></div>
+        <div class="booking-shell">
+          <div class="hero-copy-block">
+            <p class="eyebrow">Diagnostics at home powered by Thyrocare</p>
+            <h1>Search, add to cart, choose slot, confirm order.</h1>
+            <p>
+              Start with pincode serviceability, search packages, profiles, and tests, then complete beneficiary details and book a home collection slot.
+            </p>
+          </div>
+
+          <section class="search-panel" aria-label="Search diagnostics catalog">
+            <div class="api-mode" data-api-mode>Demo mode until the Thyrocare API proxy is deployed with DSA staging credentials.</div>
+            <div class="search-grid">
+              <label>
+                Pincode
+                <input type="text" data-pincode inputmode="numeric" maxlength="6" placeholder="Example: 560001" />
+              </label>
+              <label>
+                Search package, profile, or test
+                <input type="search" data-search placeholder="CBC, thyroid, lipid, full body" />
+              </label>
+              <button class="button button-primary" type="button" data-check-pincode>Check Pincode</button>
+            </div>
+            <p class="service-status" data-service-status role="status" aria-live="polite">Enter pincode to check home collection availability.</p>
+          </section>
+        </div>
+      </section>
+
+      <section class="catalog-bar" aria-label="Diagnostics catalog filters">
+        <button type="button" class="is-active" data-filter="ALL">All</button>
+        <button type="button" data-filter="PACKAGE">Packages</button>
+        <button type="button" data-filter="PROFILE">Profiles</button>
+        <button type="button" data-filter="TEST">Tests</button>
+      </section>
+
+      <section class="section catalog-section">
+        <div class="section-heading">
+          <p class="eyebrow">Packages, profiles and tests</p>
+          <h2>Showing 5 diagnostics options</h2>
+          <p>Live catalog uses Thyrocare <code>Catalog API</code>. Local preview uses demo data with the same booking flow.</p>
+        </div>
+        <div class="catalog-grid" data-catalog-grid></div>
+      </section>
+
+      <section class="section checkout-section" id="checkout">
+        <div class="checkout-summary">
+          <p class="eyebrow">Cart and order flow</p>
+          <h2>Beneficiary, pricing, slots, order.</h2>
+          <p>
+            Add to cart logs in through the PSLabs server proxy using DSA credentials. Beneficiary details are then passed to cart price breakup, slot search, and create order.
+          </p>
+          <div class="selected-card" data-selected-card>
+            <strong>No test selected yet.</strong>
+            <span>Choose Add to cart from a package, profile, or test above.</span>
+          </div>
+        </div>
+
+        <div class="checkout-flow">
+          <ol class="flow-steps" aria-label="Booking progress">
+            <li class="is-active" data-step-pill="cart">Cart</li>
+            <li data-step-pill="beneficiary">Beneficiary</li>
+            <li data-step-pill="slots">Slots</li>
+            <li data-step-pill="confirmation">Confirmation</li>
+          </ol>
+
+          <form class="beneficiary-form" data-beneficiary-form>
+            <div class="form-section-title">
+              <h3>Beneficiary details</h3>
+              <p>Required after Add to cart. These fields build the Thyrocare cart, slot, and order payloads.</p>
+            </div>
+
+            <label>
+              Full name
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label>
+              Phone number
+              <input type="tel" name="phone" autocomplete="tel" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" autocomplete="email" />
+            </label>
+            <label>
+              Age
+              <input type="number" name="age" min="1" max="120" required />
+            </label>
+            <label>
+              Gender
+              <select name="gender" required>
+                <option value="">Select gender</option>
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+                <option value="OTHER">Other</option>
+              </select>
+            </label>
+            <label>
+              Preferred date
+              <input type="date" name="appointmentDate" required />
+            </label>
+            <label class="full-field">
+              Collection address
+              <textarea name="address" rows="3" placeholder="House no, street, city, landmark" required></textarea>
+            </label>
+            <button class="button button-primary full-field" type="submit">Continue to Price and Slots</button>
+          </form>
+
+          <section class="price-panel" data-price-panel hidden>
+            <div>
+              <span>Cart price</span>
+              <strong data-price-total>INR 0</strong>
+            </div>
+            <p data-price-note>Price returned by cart price breakup API.</p>
+          </section>
+
+          <section class="slots-panel" data-slots-panel hidden>
+            <h3>Select a home collection slot</h3>
+            <div class="slot-grid" data-slot-grid></div>
+            <button class="button button-primary" type="button" data-place-order disabled>Place Order</button>
+          </section>
+
+          <section class="confirmation-panel" data-confirmation-panel hidden>
+            <p class="eyebrow">Order confirmed</p>
+            <h2 data-order-id>Order ID</h2>
+            <p>Your home collection request has been placed. Use this order ID for tracking and report retrieval once available.</p>
+            <a class="button button-secondary" href="/diagnostics/">Book another test</a>
+          </section>
+
+          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© <span data-year></span> PSLabs Diagnostics</span>
+      <span>Real orders require Thyrocare staging credentials on the backend proxy.</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
