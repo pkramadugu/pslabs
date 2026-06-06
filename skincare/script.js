@@ -127,13 +127,25 @@ const initPromoCarousel = () => {
 
 initPromoCarousel();
 
+const getContactScrollTarget = () => {
+  const section = document.getElementById("contact");
+  const location = document.getElementById("contact-location");
+  if (!section) return null;
+  if (!location) return section;
+
+  const { height, width } = location.getBoundingClientRect();
+  if (height > 0 || width > 0) return location;
+
+  return location.querySelector(".contact-card") ?? section;
+};
+
 const scrollToContactLocation = (event) => {
   if (event) {
     event.preventDefault();
   }
 
-  const location = document.getElementById("contact-location");
-  if (!location) return;
+  const scrollTarget = getContactScrollTarget();
+  if (!scrollTarget) return;
 
   if (nav?.classList.contains("is-open")) {
     nav.classList.remove("is-open");
@@ -143,7 +155,7 @@ const scrollToContactLocation = (event) => {
   }
 
   const headerOffset = (header?.offsetHeight ?? 132) + 12;
-  const targetTop = location.getBoundingClientRect().top + window.scrollY - headerOffset;
+  const targetTop = scrollTarget.getBoundingClientRect().top + window.scrollY - headerOffset;
 
   window.scrollTo({
     top: Math.max(0, targetTop),
