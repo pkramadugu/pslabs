@@ -1,7 +1,6 @@
 const http = require("node:http");
 const fs = require("node:fs/promises");
 const path = require("node:path");
-const thyrocareHandler = require("./api/thyrocare");
 const skincareAppointmentHandler = require("./api/skincare-appointment");
 const { guardApiRequest, isStaticPathAllowed } = require("./lib/guard");
 
@@ -46,6 +45,19 @@ const send = (res, statusCode, body, contentType = "text/plain; charset=utf-8") 
   res.end(body);
 };
 
+const requestPath = (req) => {
+  return new URL(req.url || "/", "http://localhost").pathname;
+};
+
+const redirectToSkincare = (res) => {
+  res.writeHead(308, { Location: "/skincare/" });
+  res.end();
+};
+
+const isSkincarePath = (pathname) => {
+  return pathname === "/skincare" || pathname.startsWith("/skincare/");
+};
+
 const fileForUrl = (urlPath) => {
   const safePath = decodeURIComponent(urlPath).split("?")[0];
   const normalized = path.normalize(safePath).replace(/^(\.\.[/\\])+/, "");
@@ -80,19 +92,25 @@ const serveStatic = async (req, res) => {
 
 loadLocalEnv().then(() => {
   const server = http.createServer(async (req, res) => {
-    if ((req.url || "").startsWith("/api/thyrocare")) {
-      if (!guardApiRequest(req, res, "thyrocare")) return;
-      await thyrocareHandler(req, res);
-      return;
-    }
+    const pathname = requestPath(req);
 
-    if ((req.url || "").startsWith("/api/skincare-appointment")) {
+    if (pathname.startsWith("/api/skincare-appointment")) {
       if (!guardApiRequest(req, res, "skincare")) return;
       await skincareAppointmentHandler(req, res);
       return;
     }
 
-    await serveStatic(req, res);
+    if (pathname === "/skincare") {
+      redirectToSkincare(res);
+      return;
+    }
+
+    if (isSkincarePath(pathname)) {
+      await serveStatic(req, res);
+      return;
+    }
+
+    redirectToSkincare(res);
   });
 
   server.listen(port, host, () => {
