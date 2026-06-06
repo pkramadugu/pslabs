@@ -14,11 +14,8 @@ const HEADERS = [
   "Date",
   "Name",
   "Phone",
-  "Concern",
-  "Preferred day",
-  "Message",
-  "Source",
-  "Timestamp"
+  "Timestamp",
+  "Status"
 ];
 
 function sheetForAppointments_() {
@@ -53,11 +50,8 @@ function doPost(e) {
       payload.date || "",
       payload.name || "",
       payload.phone || "",
-      payload.concern || "Not specified",
-      payload.preferredDay || "",
-      payload.message || "",
-      payload.source || "Priyanka's Skin Care website",
-      payload.createdAt || new Date().toISOString()
+      payload.timestamp || payload.createdAt || new Date().toISOString(),
+      ""
     ]);
 
     return ContentService

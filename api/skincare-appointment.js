@@ -26,8 +26,7 @@ const readRequestBody = async (req) => {
 const formatAppointmentDate = (date = new Date()) => {
   return new Intl.DateTimeFormat("en-IN", {
     timeZone: "Asia/Kolkata",
-    dateStyle: "medium",
-    timeStyle: "short"
+    dateStyle: "medium"
   }).format(date);
 };
 
@@ -87,7 +86,7 @@ const googleConfig = () => {
   return {
     ...serviceAccount,
     spreadsheetId,
-    range: process.env.GOOGLE_SHEETS_RANGE || "Appointments!A:J",
+    range: process.env.GOOGLE_SHEETS_RANGE || "Sheet1!A:E",
     missing
   };
 };
@@ -155,11 +154,8 @@ const appendViaAppsScript = async (appointment) => {
       date: appointment.date,
       name: appointment.name,
       phone: appointment.phone,
-      concern: appointment.concern || "Not specified",
-      preferredDay: appointment.preferredDay || "",
-      message: appointment.message || "",
-      source: appointment.source,
-      createdAt: appointment.createdAt
+      timestamp: appointment.timestamp,
+      status: ""
     }),
     redirect: "follow"
   });
@@ -195,11 +191,8 @@ const appendViaServiceAccount = async (appointment, config) => {
         appointment.date,
         appointment.name,
         appointment.phone,
-        appointment.concern || "Not specified",
-        appointment.preferredDay || "",
-        appointment.message || "",
-        appointment.source,
-        appointment.createdAt
+        appointment.timestamp,
+        ""
       ]]
     })
   });
@@ -296,15 +289,12 @@ const sendWhatsAppAlert = async (appointment) => {
   }
 
   const body = [
-    "New skincare appointment request",
+    "New skincare callback request",
     `Date: ${appointment.date}`,
     `Name: ${appointment.name}`,
     `Phone: ${appointment.phone}`,
-    `Concern: ${appointment.concern || "Not specified"}`,
-    `Preferred day: ${appointment.preferredDay || "Not specified"}`,
-    appointment.message ? `Message: ${appointment.message}` : "",
-    `Source: ${appointment.source}`
-  ].filter(Boolean).join("\n");
+    `Timestamp: ${appointment.timestamp}`
+  ].join("\n");
 
   const response = await fetch(`https://graph.facebook.com/${config.graphVersion}/${encodeURIComponent(config.phoneNumberId)}/messages`, {
     method: "POST",
@@ -359,14 +349,11 @@ module.exports = async (req, res) => {
     const body = await readRequestBody(req);
     const createdAt = new Date();
     const appointment = {
-      createdAt: createdAt.toISOString(),
+      timestamp: createdAt.toISOString(),
       date: formatAppointmentDate(createdAt),
       name: clean(body.name, 120),
       phone: clean(body.phone, 32),
-      concern: clean(body.concern, 160),
-      preferredDay: clean(body.preferredDay, 160),
-      message: clean(body.message, 900),
-      source: clean(body.source || "Priyanka's Skin Care website", 160)
+      status: ""
     };
 
     const missingFields = [];

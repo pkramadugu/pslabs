@@ -20,8 +20,11 @@
   </head>
   <body>
     <div class="top-bar">
-      <span>Dermatology &amp; aesthetic clinic</span>
-      <a class="top-bar-call" href="tel:+916304235143">Call +91 63042 35143</a>
+      <span class="top-bar-label">Dermatology &amp; aesthetic clinic</span>
+      <div class="top-bar-actions">
+        <a class="top-bar-call" href="tel:+916304235143">Call Us +91 63042 35143</a>
+        <button class="top-bar-book" type="button" data-open-callback>Request Callback</button>
+      </div>
     </div>
 
     <header class="site-header" data-header>
@@ -69,101 +72,70 @@
             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
           </svg>
         </a>
-        <a class="nav-cta" href="#appointment">Book Visit</a>
       </nav>
     </header>
 
     <main id="home">
-      <section class="hero-landing" aria-label="Clinic introduction">
-        <div class="hero-landing-bg">
-          <img class="hero-image" src="assets/clinic-hero.png" alt="Dermatologist consultation at Priyanka's Skin Care clinic" />
-          <div class="hero-overlay"></div>
+      <div class="promo-marquee" aria-hidden="true">
+        <div class="promo-marquee-track">
+          <span>Dermatology</span>
+          <span>Skin tags</span>
+          <span>Warts removal</span>
+          <span>Laser hair reduction</span>
+          <span>Chemical peels</span>
+          <span>Acne &amp; pigmentation</span>
+          <span>Scar care</span>
+          <span>Doctor-led consults</span>
+          <span>Dermatology</span>
+          <span>Skin tags</span>
+          <span>Warts removal</span>
+          <span>Laser hair reduction</span>
+          <span>Chemical peels</span>
+          <span>Acne &amp; pigmentation</span>
+          <span>Scar care</span>
+          <span>Doctor-led consults</span>
         </div>
+      </div>
 
-        <div class="hero-landing-grid">
-          <div class="hero-content">
-            <div class="badge-row">
-              <span class="badge">Doctor-led care</span>
-              <span class="badge">Skin &amp; hair clinic</span>
-              <span class="badge">Personalized plans</span>
-            </div>
-            <p class="eyebrow">Priyanka's Skin Care</p>
-            <h1>Healthy skin starts with the right diagnosis.</h1>
-            <p class="hero-copy">
-              Dermatologist-led consultations, laser treatments, chemical peels, and medical skin care — with calm follow-up and practical home routines.
-            </p>
-
-            <div class="stat-grid">
-              <article class="stat-card">
-                <span class="stat-label">Consultation</span>
-                <strong class="stat-value">Same week</strong>
-                <small>Subject to slot availability</small>
-              </article>
-              <article class="stat-card">
-                <span class="stat-label">Clinic hours</span>
-                <strong class="stat-value">Mon–Sat</strong>
-                <small>10 AM–1 PM &amp; 6–8 PM</small>
-              </article>
-              <article class="stat-card">
-                <span class="stat-label">Services offered</span>
-                <strong class="stat-value">6 treatments</strong>
-                <small>Medical &amp; aesthetic care</small>
-              </article>
-              <article class="stat-card stat-card-highlight">
-                <span class="stat-label">Book now</span>
-                <strong class="stat-value">Free callback</strong>
-                <small>Name &amp; phone only required</small>
-              </article>
-            </div>
-
-            <div class="hero-actions">
-              <a class="button button-secondary" href="tel:+916304235143">Call Clinic</a>
-            </div>
-          </div>
-
-          <aside class="lead-card" id="appointment">
-            <div class="lead-card-header">
-              <img class="lead-card-logo" src="assets/skincare-logo.jpg" alt="" />
-              <div>
-                <strong>Book your visit</strong>
-                <span>We'll confirm your slot by phone</span>
+      <section class="promo-carousel" aria-label="Clinic highlights" data-promo-carousel>
+        <div class="promo-carousel-viewport">
+          <div class="promo-carousel-track" data-promo-track>
+            <article class="promo-slide is-active" data-promo-slide>
+              <img class="promo-slide-image" src="assets/banners/slide-1.png" alt="Book your dermatology appointment online" width="1920" height="640" fetchpriority="high" decoding="async" />
+              <div class="promo-slide-copy promo-slide-copy--cta">
+                <button class="button button-primary promo-slide-cta" type="button" data-open-callback>Request Callback</button>
               </div>
-            </div>
-
-            <form class="booking-form booking-form--compact" data-booking-form>
-              <label>
-                Full name *
-                <input type="text" name="name" autocomplete="name" required />
-              </label>
-              <label>
-                Mobile number *
-                <input type="tel" name="phone" autocomplete="tel" required />
-              </label>
-              <label>
-                Main concern <span class="field-optional">(optional)</span>
-                <select name="concern">
-                  <option value="">Select a concern</option>
-                  <option>Dermatological diseases</option>
-                  <option>Skin tags removal</option>
-                  <option>Warts removal</option>
-                  <option>Laser hair reduction</option>
-                  <option>Chemical peels</option>
-                  <option>Acne, pigmentation or scars</option>
-                  <option>Other skin concern</option>
-                </select>
-              </label>
-              <label>
-                Preferred day <span class="field-optional">(optional)</span>
-                <input type="text" name="preferred-day" placeholder="e.g. Saturday" />
-              </label>
-              <label class="full-field">
-                Message <span class="field-optional">(optional)</span>
-                <textarea name="message" rows="3" placeholder="Share symptoms or goals"></textarea>
-              </label>
-              <button class="button button-primary button-block full-field" type="submit">Request Appointment</button>
-              <p class="form-status" data-form-status role="status" aria-live="polite"></p>
-            </form>
-          </aside>
+            </article>
+            <article class="promo-slide" data-promo-slide>
+              <img class="promo-slide-image" src="assets/banners/slide-2.png" alt="Clinic consultation hours" width="1920" height="640" loading="lazy" decoding="async" />
+              <div class="promo-slide-copy">
+                <span class="promo-tag">Clinic hours</span>
+                <strong>Mon–Sat · 10 AM–1 PM &amp; 6 PM–8 PM</strong>
+              </div>
+            </article>
+            <article class="promo-slide" data-promo-slide>
+              <img class="promo-slide-image" src="assets/banners/slide-3.png" alt="Laser, peels, and skin treatments" width="1920" height="640" loading="lazy" decoding="async" />
+              <div class="promo-slide-copy">
+                <span class="promo-tag">Treatments</span>
+                <strong>Laser · Peels · Acne · Skin tags &amp; warts</strong>
+                <span>Doctor-led dermatology and aesthetic care</span>
+              </div>
+            </article>
+            <article class="promo-slide" data-promo-slide>
+              <img class="promo-slide-image" src="assets/banners/slide-4.png" alt="Consultation-first dermatology care" width="1920" height="640" loading="lazy" decoding="async" />
+              <div class="promo-slide-copy">
+                <span class="promo-tag">Why us</span>
+                <strong>Consultation-first, practical home routines</strong>
+                <span>Clear diagnosis before any procedure is suggested</span>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="promo-carousel-controls" role="tablist" aria-label="Banner slides">
+          <button type="button" class="promo-dot is-active" data-promo-dot aria-label="Slide 1" aria-selected="true"></button>
+          <button type="button" class="promo-dot" data-promo-dot aria-label="Slide 2" aria-selected="false"></button>
+          <button type="button" class="promo-dot" data-promo-dot aria-label="Slide 3" aria-selected="false"></button>
+          <button type="button" class="promo-dot" data-promo-dot aria-label="Slide 4" aria-selected="false"></button>
         </div>
       </section>
 
@@ -261,37 +233,37 @@
             <div class="card-icon">D</div>
             <h3>Dermatological diseases</h3>
             <p>Diagnosis and care for rashes, allergies, eczema, psoriasis, fungal infections, and chronic skin concerns.</p>
-            <a href="#appointment">Book dermatology consult</a>
+            <a href="#" data-open-callback>Book dermatology consult</a>
           </article>
           <article class="treatment-card" id="skin-tags">
             <div class="card-icon">S</div>
             <h3>Skin tags removal</h3>
             <p>Doctor-guided assessment and removal with clear pre-care, procedure, and after-care instructions.</p>
-            <a href="#appointment">Ask about skin tags</a>
+            <a href="#" data-open-callback>Ask about skin tags</a>
           </article>
           <article class="treatment-card" id="warts">
             <div class="card-icon">W</div>
             <h3>Warts removal</h3>
             <p>Evaluation and treatment for common warts, plantar warts, and recurrent lesions with follow-up guidance.</p>
-            <a href="#appointment">Plan wart removal</a>
+            <a href="#" data-open-callback>Plan wart removal</a>
           </article>
           <article class="treatment-card" id="laser">
             <div class="card-icon">L</div>
             <h3>Laser hair reduction</h3>
             <p>Comfort-focused laser sessions for face and body with pre-care and post-care support.</p>
-            <a href="#appointment">Ask about laser</a>
+            <a href="#" data-open-callback>Ask about laser</a>
           </article>
           <article class="treatment-card" id="peels">
             <div class="card-icon">C</div>
             <h3>Chemical peels</h3>
             <p>Peel selection for acne marks, dullness, pigmentation, texture, and glow after skin-type review.</p>
-            <a href="#appointment">Discuss peels</a>
+            <a href="#" data-open-callback>Discuss peels</a>
           </article>
           <article class="treatment-card" id="acne">
             <div class="card-icon">A</div>
             <h3>Acne, pigmentation &amp; scars</h3>
             <p>Prescription plans, brightening routines, scar guidance, and maintenance reviews.</p>
-            <a href="#appointment">Plan skin care</a>
+            <a href="#" data-open-callback>Plan skin care</a>
           </article>
         </div>
       </section>
@@ -405,8 +377,8 @@
             <small>Bring your current routine to the consultation. The doctor will simplify, pause, or adjust products as needed.</small>
           </button>
           <button class="faq-item" type="button" aria-expanded="false">
-            <span>What do I need to book online?</span>
-            <small>Only your name and mobile number are required. Concern and preferred day are optional.</small>
+            <span>What do I need to request a callback?</span>
+            <small>Only your name and mobile number are required to request a callback.</small>
           </button>
         </div>
       </section>
@@ -439,7 +411,47 @@
       </section>
     </main>
 
-    <a class="sticky-cta" href="#appointment" data-sticky-cta>Book Visit</a>
+    <button class="sticky-cta" type="button" data-sticky-cta data-open-callback>Request Callback</button>
+
+    <div class="callback-modal" data-callback-modal hidden>
+      <div class="callback-modal-backdrop" data-close-callback></div>
+      <div
+        class="callback-modal-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="callback-modal-title"
+      >
+        <button class="callback-modal-close" type="button" data-close-callback aria-label="Close callback form">&times;</button>
+        <div class="callback-modal-header">
+          <img class="lead-card-logo" src="assets/skincare-logo.jpg" alt="" aria-hidden="true" />
+          <div>
+            <h2 id="callback-modal-title">Request a callback</h2>
+            <p>Name and mobile number are required.</p>
+          </div>
+        </div>
+        <form class="callback-form" data-callback-form novalidate>
+          <label>
+            Name *
+            <input type="text" name="name" autocomplete="name" placeholder="Enter your name" required />
+          </label>
+          <label>
+            Mobile number *
+            <input
+              type="tel"
+              name="phone"
+              autocomplete="tel"
+              inputmode="numeric"
+              placeholder="10-digit mobile number"
+              minlength="10"
+              maxlength="15"
+              required
+            />
+          </label>
+          <button class="button button-primary button-block" type="submit">Request Callback</button>
+          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
 
     <footer class="site-footer">
       <span>&copy; <span data-year></span> Priyanka's Skin Care</span>

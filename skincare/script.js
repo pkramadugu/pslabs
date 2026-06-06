@@ -2,11 +2,17 @@ const header = document.querySelector("[data-header]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const nav = document.querySelector("[data-nav]");
 const stickyCta = document.querySelector("[data-sticky-cta]");
-const bookingForm = document.querySelector("[data-booking-form]");
-const formStatus = document.querySelector("[data-form-status]");
+const callbackModal = document.querySelector("[data-callback-modal]");
+const callbackTriggers = document.querySelectorAll("[data-open-callback]");
+const callbackCloseTargets = document.querySelectorAll("[data-close-callback]");
+const callbackForms = document.querySelectorAll("[data-callback-form]");
 const year = document.querySelector("[data-year]");
 
 const CLINIC_PHONE = "+91 63042 35143";
+const promoCarousel = document.querySelector("[data-promo-carousel]");
+const promoTrack = document.querySelector("[data-promo-track]");
+const promoSlides = document.querySelectorAll("[data-promo-slide]");
+const promoDots = document.querySelectorAll("[data-promo-dot]");
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -19,14 +25,7 @@ const syncHeader = () => {
 
 const syncStickyCta = () => {
   if (!stickyCta) return;
-
-  const formCard = document.querySelector("#appointment");
-  const formVisible = formCard
-    ? formCard.getBoundingClientRect().top < window.innerHeight - 24
-      && formCard.getBoundingClientRect().bottom > 24
-    : false;
-
-  stickyCta.classList.toggle("is-visible", window.scrollY > 520 && !formVisible);
+  stickyCta.classList.toggle("is-visible", window.scrollY > 520);
 };
 
 const syncUi = () => {
@@ -53,6 +52,107 @@ if (navToggle && nav) {
   });
 }
 
+const initPromoCarousel = () => {
+  if (!promoCarousel || !promoTrack || promoSlides.length === 0) return;
+
+  let activeIndex = 0;
+  let timerId = null;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const intervalMs = 6000;
+
+  const setSlide = (index) => {
+    activeIndex = (index + promoSlides.length) % promoSlides.length;
+
+    promoTrack.style.transform = `translateX(-${activeIndex * 100}%)`;
+
+    promoSlides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("is-active", slideIndex === activeIndex);
+    });
+
+    promoDots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === activeIndex;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-selected", String(isActive));
+    });
+  };
+
+  const stopAutoplay = () => {
+    if (timerId) {
+      window.clearInterval(timerId);
+      timerId = null;
+    }
+  };
+
+  const startAutoplay = () => {
+    if (prefersReducedMotion || promoSlides.length < 2) return;
+    stopAutoplay();
+    timerId = window.setInterval(() => {
+      setSlide(activeIndex + 1);
+    }, intervalMs);
+  };
+
+  promoDots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      setSlide(index);
+      startAutoplay();
+    });
+  });
+
+  promoCarousel.addEventListener("mouseenter", stopAutoplay);
+  promoCarousel.addEventListener("mouseleave", startAutoplay);
+  promoCarousel.addEventListener("focusin", stopAutoplay);
+  promoCarousel.addEventListener("focusout", startAutoplay);
+
+  setSlide(0);
+  startAutoplay();
+};
+
+initPromoCarousel();
+
+let lastFocusedElement = null;
+
+const openCallbackModal = () => {
+  if (!callbackModal) return;
+
+  lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  callbackModal.hidden = false;
+  document.body.style.overflow = "hidden";
+
+  const nameInput = callbackModal.querySelector('input[name="name"]');
+  if (nameInput instanceof HTMLInputElement) {
+    window.setTimeout(() => nameInput.focus(), 0);
+  }
+};
+
+const closeCallbackModal = () => {
+  if (!callbackModal || callbackModal.hidden) return;
+
+  callbackModal.hidden = true;
+  document.body.style.overflow = "";
+
+  if (lastFocusedElement) {
+    lastFocusedElement.focus();
+    lastFocusedElement = null;
+  }
+};
+
+callbackTriggers.forEach((trigger) => {
+  trigger.addEventListener("click", (event) => {
+    event.preventDefault();
+    openCallbackModal();
+  });
+});
+
+callbackCloseTargets.forEach((target) => {
+  target.addEventListener("click", closeCallbackModal);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeCallbackModal();
+  }
+});
+
 document.querySelectorAll(".faq-item").forEach((item) => {
   item.addEventListener("click", () => {
     const expanded = item.getAttribute("aria-expanded") === "true";
@@ -60,13 +160,13 @@ document.querySelectorAll(".faq-item").forEach((item) => {
   });
 });
 
-const setFormStatus = (message, status = "") => {
-  if (!formStatus) return;
-  formStatus.textContent = message;
+const setFormStatus = (statusEl, message, status = "") => {
+  if (!statusEl) return;
+  statusEl.textContent = message;
   if (status) {
-    formStatus.dataset.status = status;
+    statusEl.dataset.status = status;
   } else {
-    delete formStatus.dataset.status;
+    delete statusEl.dataset.status;
   }
 };
 
@@ -78,23 +178,46 @@ const userFacingError = (response) => {
   return `Something went wrong. Please try again or call us at ${CLINIC_PHONE}.`;
 };
 
-if (bookingForm && formStatus) {
-  bookingForm.addEventListener("submit", async (event) => {
+const normalizePhone = (value) => {
+  const digits = String(value || "").replace(/\D/g, "");
+  if (digits.length === 12 && digits.startsWith("91")) {
+    return digits.slice(2);
+  }
+  if (digits.length === 11 && digits.startsWith("0")) {
+    return digits.slice(1);
+  }
+  return digits;
+};
+
+callbackForms.forEach((form) => {
+  const statusEl = form.querySelector("[data-form-status]");
+
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const formData = new FormData(bookingForm);
-    const submitButton = bookingForm.querySelector('button[type="submit"]');
+    const formData = new FormData(form);
+    const submitButton = form.querySelector('button[type="submit"]');
+    const name = String(formData.get("name") || "").trim();
+    const phone = normalizePhone(formData.get("phone"));
+
+    if (!name) {
+      setFormStatus(statusEl, "Please enter your name.", "error");
+      return;
+    }
+
+    if (phone.length !== 10) {
+      setFormStatus(statusEl, "Please enter a valid 10-digit mobile number.", "error");
+      return;
+    }
+
     const payload = {
-      name: String(formData.get("name") || "").trim(),
-      phone: String(formData.get("phone") || "").trim(),
-      concern: String(formData.get("concern") || "").trim(),
-      preferredDay: String(formData.get("preferred-day") || "").trim(),
-      message: String(formData.get("message") || "").trim(),
-      source: "Priyanka's Skin Care website",
+      name,
+      phone,
+      source: "Priyanka's Skin Care callback form",
       pageUrl: window.location.href
     };
 
-    setFormStatus("Sending appointment request...");
-    bookingForm.classList.add("is-submitting");
+    setFormStatus(statusEl, "Sending callback request...");
+    form.classList.add("is-submitting");
     if (submitButton) submitButton.disabled = true;
 
     try {
@@ -106,23 +229,27 @@ if (bookingForm && formStatus) {
         body: JSON.stringify(payload)
       });
 
-      const data = await response.json().catch(() => ({}));
+      await response.json().catch(() => ({}));
 
       if (!response.ok) {
         throw new Error(userFacingError(response));
       }
 
-      const dateLabel = data.appointment?.date || "today";
       setFormStatus(
-        `Thanks, ${payload.name}. Your appointment request was received on ${dateLabel}. Our clinic team will call you back shortly.`,
+        statusEl,
+        `Thanks, ${name}. We received your callback request and will call you on ${phone} shortly.`,
         "success"
       );
-      bookingForm.reset();
+      form.reset();
+
+      if (callbackModal && form.closest("[data-callback-modal]")) {
+        window.setTimeout(closeCallbackModal, 1800);
+      }
     } catch (error) {
-      setFormStatus(error.message, "error");
+      setFormStatus(statusEl, error.message, "error");
     } finally {
-      bookingForm.classList.remove("is-submitting");
+      form.classList.remove("is-submitting");
       if (submitButton) submitButton.disabled = false;
     }
   });
-}
+});

@@ -45,14 +45,11 @@ const main = async () => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      date: "Test",
+      date: "6 Jun 2026",
       name: "Google Sheet Test",
       phone: "9999999999",
-      concern: "Connection test",
-      preferredDay: "",
-      message: "Safe to delete this row",
-      source: "test-google-sheet.js",
-      createdAt: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      status: ""
     }),
     redirect: "follow"
   });

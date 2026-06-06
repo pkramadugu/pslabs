@@ -8,16 +8,25 @@
       name="description"
       content="Search diagnostics packages, profiles, and tests. Check pincode serviceability and book at-home sample collection through PSLabs."
     />
-    <meta name="theme-color" content="#fff6fb" />
+    <meta name="theme-color" content="#0077b6" />
     <link rel="canonical" href="https://pslabs.in/diagnostics/" />
     <meta property="og:title" content="PSLabs Diagnostics" />
     <meta property="og:description" content="At-home diagnostics test booking with serviceability, cart, slots, and order confirmation." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pslabs.in/diagnostics/" />
     <meta property="og:image" content="https://pslabs.in/diagnostics/assets/diagnostics-hero.png" />
+    <link rel="icon" href="assets/diagnostics-hero.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="top-bar">
+      <span class="top-bar-label">Powered by Thyrocare · Home sample collection</span>
+      <div class="top-bar-actions">
+        <a class="top-bar-call" href="tel:+916304235143">+91 63042 35143</a>
+        <a class="top-bar-book" href="#catalog">Book A Test</a>
+      </div>
+    </div>
+
     <header class="site-header" data-header>
       <a class="brand" href="/" aria-label="PSLabs home">
         <span class="brand-mark">PS</span>
@@ -42,34 +51,111 @@
       </nav>
     </header>
 
-    <main>
+    <main id="main-content">
+      <section class="promo-carousel" aria-label="Diagnostics offers" data-promo-carousel>
+        <div class="promo-carousel-viewport">
+          <div class="promo-carousel-track">
+            <article class="promo-slide is-active" data-promo-slide>
+              <span class="promo-tag">Home collection</span>
+              <strong>Book lab tests at your doorstep</strong>
+              <span>Check pincode, pick a package, and choose a collection slot</span>
+            </article>
+            <article class="promo-slide" data-promo-slide>
+              <span class="promo-tag">Health packages</span>
+              <strong>Aarogyam profiles &amp; full-body checkups</strong>
+              <span>Packages, profiles, and individual tests in one catalog</span>
+            </article>
+            <article class="promo-slide" data-promo-slide>
+              <span class="promo-tag">Digital reports</span>
+              <strong>Reports online after sample processing</strong>
+              <span>Track orders with your confirmation ID</span>
+            </article>
+            <article class="promo-slide" data-promo-slide>
+              <span class="promo-tag">Affordable care</span>
+              <strong>Preventive diagnostics made accessible</strong>
+              <span>Transparent pricing before you confirm the order</span>
+            </article>
+          </div>
+        </div>
+        <div class="promo-carousel-controls" role="tablist" aria-label="Offer slides">
+          <button type="button" class="promo-dot is-active" data-promo-dot aria-label="Slide 1" aria-selected="true"></button>
+          <button type="button" class="promo-dot" data-promo-dot aria-label="Slide 2" aria-selected="false"></button>
+          <button type="button" class="promo-dot" data-promo-dot aria-label="Slide 3" aria-selected="false"></button>
+          <button type="button" class="promo-dot" data-promo-dot aria-label="Slide 4" aria-selected="false"></button>
+        </div>
+      </section>
+
+      <div class="promo-marquee" aria-hidden="true">
+        <div class="promo-marquee-track">
+          <span>CBC</span>
+          <span>Thyroid</span>
+          <span>Lipid profile</span>
+          <span>Aarogyam</span>
+          <span>Diabetes</span>
+          <span>Vitamin D</span>
+          <span>Full body checkup</span>
+          <span>Home collection</span>
+          <span>CBC</span>
+          <span>Thyroid</span>
+          <span>Lipid profile</span>
+          <span>Aarogyam</span>
+          <span>Diabetes</span>
+          <span>Vitamin D</span>
+          <span>Full body checkup</span>
+          <span>Home collection</span>
+        </div>
+      </div>
+
       <section class="booking-hero" id="catalog">
         <img class="hero-image" src="assets/diagnostics-hero.png" alt="At-home diagnostics consultation before sample collection" />
         <div class="hero-overlay"></div>
         <div class="booking-shell">
-          <div class="hero-copy-block">
-            <p class="eyebrow">Diagnostics at home powered by Thyrocare</p>
-            <h1>Search, add to cart, choose slot, confirm order.</h1>
-            <p>
-              Start with pincode serviceability, search packages, profiles, and tests, then complete beneficiary details and book a home collection slot.
-            </p>
-          </div>
-
-          <section class="search-panel" aria-label="Search diagnostics catalog">
-            <div class="api-mode" data-api-mode>Demo mode until the Thyrocare API proxy is deployed with DSA staging credentials.</div>
+          <section class="search-panel search-panel--first-fold" aria-label="Book a test">
+            <div class="search-panel-header">
+              <img class="thyrocare-badge" src="assets/diagnostics-hero.png" alt="" aria-hidden="true" />
+              <div>
+                <strong>Book your test</strong>
+                <span>Check pincode first, then browse packages</span>
+              </div>
+            </div>
+            <div class="api-mode" data-api-mode>Checking diagnostics service connection.</div>
             <div class="search-grid">
               <label>
-                Pincode
-                <input type="text" data-pincode inputmode="numeric" maxlength="6" placeholder="Example: 560001" />
+                Pincode *
+                <input type="text" data-pincode inputmode="numeric" maxlength="6" placeholder="e.g. 560001" />
               </label>
               <label>
-                Search package, profile, or test
-                <input type="search" data-search placeholder="CBC, thyroid, lipid, full body" />
+                Search tests
+                <input type="search" data-search placeholder="CBC, thyroid, lipid, Aarogyam" />
               </label>
               <button class="button button-primary" type="button" data-check-pincode>Check Pincode</button>
             </div>
             <p class="service-status" data-service-status role="status" aria-live="polite">Enter pincode to check home collection availability.</p>
+            <div class="popular-tests" aria-label="Popular searches">
+              <span>Popular:</span>
+              <button type="button" class="popular-chip" data-popular-search="thyroid">Thyroid</button>
+              <button type="button" class="popular-chip" data-popular-search="cbc">CBC</button>
+              <button type="button" class="popular-chip" data-popular-search="lipid">Lipid</button>
+              <button type="button" class="popular-chip" data-popular-search="aarogyam">Aarogyam</button>
+            </div>
           </section>
+
+          <div class="hero-copy-block">
+            <p class="eyebrow">Diagnostics at home · Thyrocare partner APIs</p>
+            <h1>Book blood tests with guided home collection.</h1>
+            <p>
+              Verify serviceability in your area, explore packages and profiles, add to cart, and confirm beneficiary details with a collection slot — similar to the <a class="inline-link" href="https://www.thyrocare.com/" target="_blank" rel="noopener noreferrer">Thyrocare</a> booking flow.
+            </p>
+            <ul class="trust-list">
+              <li>Home sample collection</li>
+              <li>Digital reports</li>
+              <li>Transparent pricing</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#catalog">Book A Test</a>
+              <a class="button button-secondary" href="tel:+916304235143">Call Support</a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -83,8 +169,8 @@
       <section class="section catalog-section">
         <div class="section-heading">
           <p class="eyebrow">Packages, profiles and tests</p>
-          <h2>Showing 5 diagnostics options</h2>
-          <p>Live catalog uses Thyrocare <code>Catalog API</code>. Local preview uses demo data with the same booking flow.</p>
+          <h2 data-catalog-heading>Diagnostics catalog</h2>
+          <p>Browse packages, profiles, and individual tests. Prices are confirmed during checkout.</p>
         </div>
         <div class="catalog-grid" data-catalog-grid></div>
       </section>
@@ -94,7 +180,7 @@
           <p class="eyebrow">Cart and order flow</p>
           <h2>Beneficiary, pricing, slots, order.</h2>
           <p>
-            Add to cart logs in through the PSLabs server proxy using DSA credentials. Beneficiary details are then passed to cart price breakup, slot search, and create order.
+            Select a test, enter beneficiary details, review pricing, pick a home collection slot, and confirm your order.
           </p>
           <div class="selected-card" data-selected-card>
             <strong>No test selected yet.</strong>
@@ -110,10 +196,10 @@
             <li data-step-pill="confirmation">Confirmation</li>
           </ol>
 
-          <form class="beneficiary-form" data-beneficiary-form>
+          <form class="beneficiary-form" data-beneficiary-form hidden>
             <div class="form-section-title">
               <h3>Beneficiary details</h3>
-              <p>Required after Add to cart. These fields build the Thyrocare cart, slot, and order payloads.</p>
+              <p>Complete after adding a test to cart to continue with pricing and slot booking.</p>
             </div>
 
             <label>
@@ -180,7 +266,12 @@
 
     <footer class="site-footer">
       <span>© <span data-year></span> PSLabs Diagnostics</span>
-      <span>Real orders require Thyrocare staging credentials on the backend proxy.</span>
+      <nav class="footer-nav" aria-label="Site links">
+        <a href="/">PSLabs</a>
+        <a href="/skincare/">Skincare</a>
+        <a href="https://www.thyrocare.com/" target="_blank" rel="noopener noreferrer">Thyrocare</a>
+      </nav>
+      <span>Home collection booking powered by Thyrocare partner APIs.</span>
     </footer>
 
     <script src="script.js"></script>

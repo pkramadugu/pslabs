@@ -20,6 +20,13 @@ const placeOrderButton = document.querySelector("[data-place-order]");
 const confirmationPanel = document.querySelector("[data-confirmation-panel]");
 const orderIdNode = document.querySelector("[data-order-id]");
 const formStatus = document.querySelector("[data-form-status]");
+const catalogHeading = document.querySelector("[data-catalog-heading]");
+const promoCarousel = document.querySelector("[data-promo-carousel]");
+const promoSlides = document.querySelectorAll("[data-promo-slide]");
+const promoDots = document.querySelectorAll("[data-promo-dot]");
+const popularSearchButtons = document.querySelectorAll("[data-popular-search]");
+
+const SUPPORT_PHONE = "+91 63042 35143";
 
 const state = {
   catalog: [],
@@ -158,15 +165,23 @@ const visibleCatalog = () => {
       const haystack = [item.name, item.displayType, ...testsOf(item)].join(" ").toLowerCase();
       return haystack.includes(query);
     })
-    .slice(0, 5);
+    .slice(0, 12);
+};
+
+const updateCatalogHeading = (count) => {
+  if (!catalogHeading) return;
+  catalogHeading.textContent = count
+    ? `Showing ${count} diagnostics option${count === 1 ? "" : "s"}`
+    : "Diagnostics catalog";
 };
 
 const renderCatalog = () => {
   if (!catalogGrid) return;
   const items = visibleCatalog();
+  updateCatalogHeading(items.length);
 
   if (items.length === 0) {
-    catalogGrid.innerHTML = '<div class="empty-state">No packages, profiles, or tests available. Confirm backend credentials and catalog API access.</div>';
+    catalogGrid.innerHTML = '<div class="empty-state"><strong>No matching tests found</strong><span>Try another search or filter, or call support for help.</span></div>';
     return;
   }
 
@@ -218,7 +233,7 @@ const updateSelectedCard = () => {
 };
 
 const hydrateCatalog = async () => {
-  setApiMode("Connecting to Thyrocare sandbox catalog...");
+  setApiMode("Loading diagnostics catalog...");
   renderCatalog();
 
   try {
@@ -230,10 +245,10 @@ const hydrateCatalog = async () => {
       pageSize: 25
     });
     state.catalog = normalizeCatalog(data);
-    setApiMode("Connected to Thyrocare sandbox via PSLabs backend proxy.", true);
+    setApiMode(`Connected. ${state.catalog.length} tests and packages available.`, true);
   } catch (error) {
     state.catalog = [];
-    setApiMode(`Sandbox catalog unavailable: ${error.message}`);
+    setApiMode(`Catalog unavailable. Call ${SUPPORT_PHONE} for assistance.`);
   }
 
   renderCatalog();
@@ -262,7 +277,7 @@ const checkServiceability = async () => {
   } catch (error) {
     state.serviceable = false;
     if (serviceStatus) {
-      serviceStatus.textContent = `Serviceability API failed: ${error.message}`;
+      serviceStatus.textContent = `Could not verify pincode right now. Call ${SUPPORT_PHONE}.`;
       serviceStatus.className = "service-status is-bad";
     }
     return false;
@@ -298,18 +313,19 @@ const addToCart = async (itemId) => {
 
   try {
     await callProxy("session");
-    setStatus("DSA login completed through PSLabs backend. Add beneficiary details.");
+    setStatus("Test added. Complete beneficiary details to continue.");
   } catch (error) {
     state.selectedItem = null;
     updateSelectedCard();
     renderCatalog();
-    setStatus(`Add to cart failed during DSA login: ${error.message}`);
+    setStatus(`Could not add test. Please call ${SUPPORT_PHONE}.`);
     return;
   }
 
   updateStep("beneficiary");
   updateSelectedCard();
   renderCatalog();
+  if (beneficiaryForm) beneficiaryForm.hidden = false;
   if (pricePanel) pricePanel.hidden = true;
   if (slotsPanel) slotsPanel.hidden = true;
   if (confirmationPanel) confirmationPanel.hidden = true;
@@ -576,10 +592,77 @@ const placeOrder = async () => {
   confirmationPanel?.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
+const initPromoCarousel = () => {
+  if (!promoCarousel || promoSlides.length === 0) return;
+
+  let activeIndex = 0;
+  let timerId = null;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const setSlide = (index) => {
+    activeIndex = (index + promoSlides.length) % promoSlides.length;
+    promoSlides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("is-active", slideIndex === activeIndex);
+    });
+    promoDots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === activeIndex;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-selected", String(isActive));
+    });
+  };
+
+  const stopAutoplay = () => {
+    if (timerId) {
+      window.clearInterval(timerId);
+      timerId = null;
+    }
+  };
+
+  const startAutoplay = () => {
+    if (prefersReducedMotion || promoSlides.length < 2) return;
+    stopAutoplay();
+    timerId = window.setInterval(() => setSlide(activeIndex + 1), 5000);
+  };
+
+  promoDots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      setSlide(index);
+      startAutoplay();
+    });
+  });
+
+  promoCarousel.addEventListener("mouseenter", stopAutoplay);
+  promoCarousel.addEventListener("mouseleave", startAutoplay);
+  setSlide(0);
+  startAutoplay();
+};
+
+initPromoCarousel();
+
 if (searchInput) {
   searchInput.addEventListener("input", () => {
     state.query = searchInput.value;
     renderCatalog();
+  });
+}
+
+popularSearchButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const term = button.dataset.popularSearch || "";
+    if (!searchInput) return;
+    searchInput.value = term;
+    state.query = term;
+    renderCatalog();
+    document.querySelector(".catalog-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+if (pincodeInput) {
+  pincodeInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      checkServiceability();
+    }
   });
 }
 
@@ -628,3 +711,4 @@ if (placeOrderButton) {
 
 hydrateCatalog();
 updateSelectedCard();
+updateStep("cart");
