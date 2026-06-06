@@ -37,17 +37,35 @@ syncUi();
 window.addEventListener("scroll", syncUi, { passive: true });
 
 if (navToggle && nav) {
-  navToggle.addEventListener("click", () => {
-    const isOpen = nav.classList.toggle("is-open");
+  const setNavOpen = (isOpen) => {
+    nav.classList.toggle("is-open", isOpen);
     navToggle.setAttribute("aria-expanded", String(isOpen));
     navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    document.body.classList.toggle("nav-open", isOpen);
+  };
+
+  navToggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    setNavOpen(!nav.classList.contains("is-open"));
   });
 
   nav.addEventListener("click", (event) => {
     if (event.target instanceof HTMLAnchorElement) {
-      nav.classList.remove("is-open");
-      navToggle.setAttribute("aria-expanded", "false");
-      navToggle.setAttribute("aria-label", "Open menu");
+      setNavOpen(false);
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!nav.classList.contains("is-open")) return;
+    if (event.target instanceof Node && (nav.contains(event.target) || navToggle.contains(event.target))) {
+      return;
+    }
+    setNavOpen(false);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      setNavOpen(false);
     }
   });
 }
