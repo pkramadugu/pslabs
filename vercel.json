@@ -1,0 +1,11 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "/skincare/", "permanent": true },
+    { "source": "/skincare", "destination": "/skincare/", "permanent": true },
+    {
+      "source": "/:path((?!skincare|api).*)",
+      "destination": "/skincare/",
+      "permanent": true
+    }
+  ]
+}

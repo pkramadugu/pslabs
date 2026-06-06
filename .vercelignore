@@ -1,0 +1,5 @@
+.env.local
+data/
+scripts/
+server.js
+api/thyrocare.js

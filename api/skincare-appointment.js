@@ -1,6 +1,7 @@
 const { createSign } = require("node:crypto");
 const fs = require("node:fs/promises");
 const path = require("node:path");
+const { guardApiRequest } = require("../lib/guard");
 
 const localAppointmentsPath = () => path.join(__dirname, "..", "data", "skincare-appointments.jsonl");
 
@@ -14,6 +15,13 @@ const jsonResponse = (res, statusCode, body) => {
 };
 
 const readRequestBody = async (req) => {
+  if (req.body !== undefined && req.body !== null) {
+    if (typeof req.body === "string") {
+      return req.body ? JSON.parse(req.body) : {};
+    }
+    return req.body;
+  }
+
   let raw = "";
 
   for await (const chunk of req) {
@@ -342,6 +350,10 @@ const integrationResult = async (operation) => {
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     jsonResponse(res, 405, { error: "Use POST" });
+    return;
+  }
+
+  if (!guardApiRequest(req, res, "skincare")) {
     return;
   }
 
