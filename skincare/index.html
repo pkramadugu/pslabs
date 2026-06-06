@@ -36,43 +36,45 @@
         </span>
       </a>
 
-      <button class="nav-toggle" type="button" data-nav-toggle aria-label="Open menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
       <nav class="main-nav" data-nav>
         <a href="#highlights">Why us</a>
         <a href="#treatments">Treatments</a>
         <a href="#doctor">Doctor</a>
         <a href="#testimonials">Reviews</a>
         <a href="#faq">FAQ</a>
-        <a
-          class="nav-social nav-social--instagram"
-          href="https://www.instagram.com/dr.priyankasskinclinic?utm_source=qr&igsh=NDM2MWJkbGwzc3g0"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-        >
-          <svg aria-hidden="true" viewBox="0 0 24 24">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-        </a>
-        <a
-          class="nav-social nav-social--facebook"
-          href="https://www.facebook.com/share/1bxRrgK3gh/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Facebook"
-        >
-          <svg aria-hidden="true" viewBox="0 0 24 24">
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-          </svg>
-        </a>
+        <div class="nav-mobile-socials">
+          <a
+            class="nav-social nav-social--instagram"
+            href="https://www.instagram.com/dr.priyankasskinclinic?utm_source=qr&igsh=NDM2MWJkbGwzc3g0"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a
+            class="nav-social nav-social--facebook"
+            href="https://www.facebook.com/share/1bxRrgK3gh/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+        </div>
       </nav>
+
+      <button class="nav-toggle" type="button" data-nav-toggle aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </header>
 
     <main id="home">
@@ -103,7 +105,10 @@
             <article class="promo-slide is-active" data-promo-slide>
               <img class="promo-slide-image" src="assets/banners/slide-1.png" alt="Book your dermatology appointment online" width="1920" height="640" fetchpriority="high" decoding="async" />
               <div class="promo-slide-copy promo-slide-copy--cta">
-                <button class="button button-primary promo-slide-cta" type="button" data-open-callback>Request Callback</button>
+                <div class="promo-slide-actions">
+                  <a class="button button-secondary promo-slide-cta" href="tel:+916304235143">Call Us +91 63042 35143</a>
+                  <button class="button button-primary promo-slide-cta" type="button" data-open-callback>Request Callback</button>
+                </div>
               </div>
             </article>
             <article class="promo-slide" data-promo-slide>
@@ -111,6 +116,7 @@
               <div class="promo-slide-copy">
                 <span class="promo-tag">Clinic hours</span>
                 <strong>Mon–Sat · 10 AM–1 PM &amp; 6 PM–8 PM</strong>
+                <span>Offline &amp; online consultations available</span>
               </div>
             </article>
             <article class="promo-slide" data-promo-slide>
@@ -407,6 +413,7 @@
             </a>
           </div>
           <span>Mon to Sat, 10:00 AM to 1:00 PM and 6:00 PM to 8:00 PM</span>
+          <span>Offline &amp; online consultations available. Call <a href="tel:+916304235143">+91 63042 35143</a> or <button class="contact-callback-link" type="button" data-open-callback>request a callback</button>.</span>
         </address>
       </section>
     </main>
@@ -467,6 +474,8 @@
         "logo": "https://pslabs.in/skincare/assets/skincare-logo.jpg",
         "medicalSpecialty": ["Dermatology", "CosmeticDermatology"],
         "openingHours": ["Mo-Sa 10:00-13:00", "Mo-Sa 18:00-20:00"],
+        "description": "Offline and online consultations available. Call +91 63042 35143 or request a callback.",
+        "telephone": "+916304235143",
         "priceRange": "$$"
       }
     </script>
