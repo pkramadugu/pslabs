@@ -127,6 +127,44 @@ const initPromoCarousel = () => {
 
 initPromoCarousel();
 
+const scrollToContactLocation = (event) => {
+  if (event) {
+    event.preventDefault();
+  }
+
+  const location = document.getElementById("contact-location");
+  if (!location) return;
+
+  if (nav?.classList.contains("is-open")) {
+    nav.classList.remove("is-open");
+    navToggle?.setAttribute("aria-expanded", "false");
+    navToggle?.setAttribute("aria-label", "Open menu");
+    document.body.classList.remove("nav-open");
+  }
+
+  const headerOffset = (header?.offsetHeight ?? 132) + 12;
+  const targetTop = location.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+  window.scrollTo({
+    top: Math.max(0, targetTop),
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+  });
+
+  if (window.history.replaceState) {
+    window.history.replaceState(null, "", "#contact");
+  }
+};
+
+document.querySelectorAll('a[href="#contact"]').forEach((link) => {
+  link.addEventListener("click", scrollToContactLocation);
+});
+
+if (window.location.hash === "#contact") {
+  window.requestAnimationFrame(() => {
+    scrollToContactLocation();
+  });
+}
+
 let lastFocusedElement = null;
 
 const openCallbackModal = () => {
