@@ -8,13 +8,10 @@
       name="description"
       content="Priyanka's Skin Care offers dermatologist-led skin, hair, laser, anti-aging, and aesthetic treatments with careful diagnosis and personalized plans."
     />
-    <meta name="theme-color" content="#fff6fb" />
+    <meta name="theme-color" content="#5b2a73" />
     <link rel="canonical" href="https://pslabs.in/skincare/" />
     <meta property="og:title" content="Priyanka's Skin Care" />
-    <meta
-      property="og:description"
-      content="Dermatologist-led skincare, hair restoration, laser, and aesthetic treatments."
-    />
+    <meta property="og:description" content="Dermatologist-led skincare, laser, and aesthetic treatments." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pslabs.in/skincare/" />
     <meta property="og:image" content="https://pslabs.in/skincare/assets/clinic-hero.png" />
@@ -22,12 +19,17 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="top-bar">
+      <span>Dermatology &amp; aesthetic clinic</span>
+      <a class="top-bar-call" href="tel:+916304235143">Call +91 63042 35143</a>
+    </div>
+
     <header class="site-header" data-header>
       <a class="brand" href="/skincare/" aria-label="Priyanka's Skin Care home">
         <img class="brand-logo" src="assets/skincare-logo.jpg" alt="" />
         <span>
           <strong>Priyanka's Skin Care</strong>
-          <small>Dermatology & Aesthetics</small>
+          <small>Dermatology &amp; Aesthetics</small>
         </span>
       </a>
 
@@ -38,34 +40,33 @@
       </button>
 
       <nav class="main-nav" data-nav>
-        <a href="/">PSLabs</a>
-        <a href="/diagnostics/">Diagnostics</a>
+        <a href="#highlights">Why us</a>
         <a href="#treatments">Treatments</a>
         <a href="#doctor">Doctor</a>
-        <a href="#results">Results</a>
-        <a href="#contact">Contact</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#faq">FAQ</a>
         <a
-          class="nav-social"
+          class="nav-social nav-social--instagram"
           href="https://www.instagram.com/dr.priyankasskinclinic?utm_source=qr&igsh=NDM2MWJkbGwzc3g0"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Priyanka's Skin Care on Instagram"
+          aria-label="Instagram"
         >
           <svg aria-hidden="true" viewBox="0 0 24 24">
-            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-            <circle cx="12" cy="12" r="4"></circle>
-            <circle cx="17.4" cy="6.6" r="1"></circle>
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
           </svg>
         </a>
         <a
-          class="nav-social"
+          class="nav-social nav-social--facebook"
           href="https://www.facebook.com/share/1bxRrgK3gh/"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Priyanka's Skin Care on Facebook"
+          aria-label="Facebook"
         >
           <svg aria-hidden="true" viewBox="0 0 24 24">
-            <path d="M14 8h3V4h-3c-3 0-5 2-5 5v2H6v4h3v5h4v-5h3l1-4h-4V9c0-.6.4-1 1-1Z"></path>
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
           </svg>
         </a>
         <a class="nav-cta" href="#appointment">Book Visit</a>
@@ -73,50 +74,178 @@
     </header>
 
     <main id="home">
-      <section class="hero" aria-label="Priyanka's Skin Care introduction">
-        <img class="hero-image" src="assets/clinic-hero.png" alt="Dermatologist consultation in a modern skincare clinic" />
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="eyebrow">Skin, hair, laser & aesthetic clinic</p>
-          <h1>Healthy skin starts with the right diagnosis.</h1>
-          <p class="hero-copy">
-            Priyanka's Skin Care combines dermatologist-led treatment plans, advanced procedures, and calm follow-up care for dermatological diseases, skin tags, warts, laser hair reduction, chemical peels, and everyday skin health.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#appointment">Book Appointment</a>
-            <a class="button button-secondary" href="tel:+916304235143">Call Clinic</a>
+      <section class="hero-landing" aria-label="Clinic introduction">
+        <div class="hero-landing-bg">
+          <img class="hero-image" src="assets/clinic-hero.png" alt="Dermatologist consultation at Priyanka's Skin Care clinic" />
+          <div class="hero-overlay"></div>
+        </div>
+
+        <div class="hero-landing-grid">
+          <div class="hero-content">
+            <div class="badge-row">
+              <span class="badge">Doctor-led care</span>
+              <span class="badge">Skin &amp; hair clinic</span>
+              <span class="badge">Personalized plans</span>
+            </div>
+            <p class="eyebrow">Priyanka's Skin Care</p>
+            <h1>Healthy skin starts with the right diagnosis.</h1>
+            <p class="hero-copy">
+              Dermatologist-led consultations, laser treatments, chemical peels, and medical skin care — with calm follow-up and practical home routines.
+            </p>
+
+            <div class="stat-grid">
+              <article class="stat-card">
+                <span class="stat-label">Consultation</span>
+                <strong class="stat-value">Same week</strong>
+                <small>Subject to slot availability</small>
+              </article>
+              <article class="stat-card">
+                <span class="stat-label">Clinic hours</span>
+                <strong class="stat-value">Mon–Sat</strong>
+                <small>10 AM–1 PM &amp; 6–8 PM</small>
+              </article>
+              <article class="stat-card">
+                <span class="stat-label">Services offered</span>
+                <strong class="stat-value">6 treatments</strong>
+                <small>Medical &amp; aesthetic care</small>
+              </article>
+              <article class="stat-card stat-card-highlight">
+                <span class="stat-label">Book now</span>
+                <strong class="stat-value">Free callback</strong>
+                <small>Name &amp; phone only required</small>
+              </article>
+            </div>
+
+            <div class="hero-actions">
+              <a class="button button-secondary" href="tel:+916304235143">Call Clinic</a>
+            </div>
           </div>
+
+          <aside class="lead-card" id="appointment">
+            <div class="lead-card-header">
+              <img class="lead-card-logo" src="assets/skincare-logo.jpg" alt="" />
+              <div>
+                <strong>Book your visit</strong>
+                <span>We'll confirm your slot by phone</span>
+              </div>
+            </div>
+
+            <form class="booking-form booking-form--compact" data-booking-form>
+              <label>
+                Full name *
+                <input type="text" name="name" autocomplete="name" required />
+              </label>
+              <label>
+                Mobile number *
+                <input type="tel" name="phone" autocomplete="tel" required />
+              </label>
+              <label>
+                Main concern <span class="field-optional">(optional)</span>
+                <select name="concern">
+                  <option value="">Select a concern</option>
+                  <option>Dermatological diseases</option>
+                  <option>Skin tags removal</option>
+                  <option>Warts removal</option>
+                  <option>Laser hair reduction</option>
+                  <option>Chemical peels</option>
+                  <option>Acne, pigmentation or scars</option>
+                  <option>Other skin concern</option>
+                </select>
+              </label>
+              <label>
+                Preferred day <span class="field-optional">(optional)</span>
+                <input type="text" name="preferred-day" placeholder="e.g. Saturday" />
+              </label>
+              <label class="full-field">
+                Message <span class="field-optional">(optional)</span>
+                <textarea name="message" rows="3" placeholder="Share symptoms or goals"></textarea>
+              </label>
+              <button class="button button-primary button-block full-field" type="submit">Request Appointment</button>
+              <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+            </form>
+          </aside>
         </div>
       </section>
 
       <section class="quick-care" aria-label="Popular care areas">
-        <a href="#dermatology">Dermatological diseases</a>
-        <a href="#skin-tags">Skin tags</a>
-        <a href="#warts">Warts removal</a>
-        <a href="#laser">Laser hair reduction</a>
-        <a href="#peels">Chemical peels</a>
+        <div class="quick-care-grid">
+          <a class="quick-care-card" href="#dermatology">
+            <span class="quick-care-icon" aria-hidden="true">D</span>
+            <span>Dermatological diseases</span>
+          </a>
+          <a class="quick-care-card" href="#skin-tags">
+            <span class="quick-care-icon" aria-hidden="true">S</span>
+            <span>Skin tags</span>
+          </a>
+          <a class="quick-care-card" href="#warts">
+            <span class="quick-care-icon" aria-hidden="true">W</span>
+            <span>Warts removal</span>
+          </a>
+          <a class="quick-care-card" href="#laser">
+            <span class="quick-care-icon" aria-hidden="true">L</span>
+            <span>Laser hair reduction</span>
+          </a>
+          <a class="quick-care-card" href="#peels">
+            <span class="quick-care-icon" aria-hidden="true">C</span>
+            <span>Chemical peels</span>
+          </a>
+        </div>
       </section>
 
-      <section class="section section-intro">
-        <div class="section-copy">
-          <p class="eyebrow">A clinic built around clarity</p>
-          <h2>Care plans that feel personal, precise, and practical.</h2>
+      <section class="section highlights" id="highlights">
+        <div class="section-heading section-heading-center">
+          <p class="eyebrow">Why patients choose us</p>
+          <h2>Trusted, doctor-led skin care</h2>
         </div>
-        <div class="intro-grid">
-          <article>
-            <span class="number">01</span>
-            <h3>Consultation first</h3>
-            <p>Every plan begins with history, examination, skin goals, and lifestyle factors before treatment is recommended.</p>
+        <div class="highlight-grid">
+          <article class="highlight-card">
+            <span class="highlight-tag">Care quality</span>
+            <strong>Consultation-first approach</strong>
+            <p>Every plan begins with history, examination, and skin goals before any procedure is suggested.</p>
           </article>
-          <article>
-            <span class="number">02</span>
+          <article class="highlight-card">
+            <span class="highlight-tag">Clinical</span>
+            <strong>Medical &amp; aesthetic expertise</strong>
+            <p>From rashes and acne to laser, peels, and skin tag removal — under one supervised clinic.</p>
+          </article>
+          <article class="highlight-card">
+            <span class="highlight-tag">Follow-up</span>
+            <strong>Progress reviews built in</strong>
+            <p>Routines are adjusted as your skin responds so results stay stable, not rushed.</p>
+          </article>
+          <article class="highlight-card">
+            <span class="highlight-tag">Access</span>
+            <strong>Easy booking &amp; callbacks</strong>
+            <p>Share name and phone online; the clinic team confirms timing and consultation type.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section benefits" id="benefits">
+        <div class="section-heading section-heading-center">
+          <p class="eyebrow">Clinic benefits</p>
+          <h2>Care that feels personal, precise, and practical</h2>
+        </div>
+        <div class="benefit-grid">
+          <article class="benefit-card">
+            <div class="benefit-icon">01</div>
+            <h3>Clear diagnosis</h3>
+            <p>Understand what's causing your concern before starting products or procedures.</p>
+          </article>
+          <article class="benefit-card">
+            <div class="benefit-icon">02</div>
             <h3>Procedure-ready rooms</h3>
-            <p>Laser, peel, facial, and injectable workflows are designed around clean protocols and measured outcomes.</p>
+            <p>Laser, peel, and removal workflows follow clean protocols and measured outcomes.</p>
           </article>
-          <article>
-            <span class="number">03</span>
-            <h3>Follow-up that matters</h3>
-            <p>Progress reviews help fine tune routines, avoid over-treatment, and keep results sustainable.</p>
+          <article class="benefit-card">
+            <div class="benefit-icon">03</div>
+            <h3>Realistic timelines</h3>
+            <p>Expectations are set upfront — what improves quickly vs. what needs maintenance.</p>
+          </article>
+          <article class="benefit-card">
+            <div class="benefit-icon">04</div>
+            <h3>Home-care guidance</h3>
+            <p>Simpler routines you can follow between visits, with sunscreen and product counseling.</p>
           </article>
         </div>
       </section>
@@ -125,28 +254,25 @@
         <div class="section-heading">
           <p class="eyebrow">Treatments</p>
           <h2>Dermatology and aesthetic services</h2>
-          <p>
-            A focused menu for common skin and hair concerns, from medical dermatology to appearance-led procedures.
-          </p>
+          <p>A focused menu for common skin and hair concerns, from medical dermatology to appearance-led procedures.</p>
         </div>
-
         <div class="treatment-grid">
           <article class="treatment-card" id="dermatology">
             <div class="card-icon">D</div>
             <h3>Dermatological diseases</h3>
-            <p>Diagnosis and care plans for rashes, allergies, eczema, psoriasis, fungal infections, sensitivity, and chronic skin concerns.</p>
+            <p>Diagnosis and care for rashes, allergies, eczema, psoriasis, fungal infections, and chronic skin concerns.</p>
             <a href="#appointment">Book dermatology consult</a>
           </article>
           <article class="treatment-card" id="skin-tags">
             <div class="card-icon">S</div>
             <h3>Skin tags removal</h3>
-            <p>Doctor-guided assessment and removal of skin tags with clear pre-care, procedure, and after-care instructions.</p>
+            <p>Doctor-guided assessment and removal with clear pre-care, procedure, and after-care instructions.</p>
             <a href="#appointment">Ask about skin tags</a>
           </article>
           <article class="treatment-card" id="warts">
             <div class="card-icon">W</div>
             <h3>Warts removal</h3>
-            <p>Evaluation and treatment planning for common warts, plantar warts, and recurrent lesions with follow-up guidance.</p>
+            <p>Evaluation and treatment for common warts, plantar warts, and recurrent lesions with follow-up guidance.</p>
             <a href="#appointment">Plan wart removal</a>
           </article>
           <article class="treatment-card" id="laser">
@@ -158,53 +284,51 @@
           <article class="treatment-card" id="peels">
             <div class="card-icon">C</div>
             <h3>Chemical peels</h3>
-            <p>Peel selection for acne marks, dullness, pigmentation, texture, and glow programs after skin-type review.</p>
+            <p>Peel selection for acne marks, dullness, pigmentation, texture, and glow after skin-type review.</p>
             <a href="#appointment">Discuss peels</a>
           </article>
           <article class="treatment-card" id="acne">
             <div class="card-icon">A</div>
-            <h3>Acne, pigmentation & scars</h3>
-            <p>Prescription plans, brightening routines, scar guidance, sun-care counseling, and maintenance reviews.</p>
+            <h3>Acne, pigmentation &amp; scars</h3>
+            <p>Prescription plans, brightening routines, scar guidance, and maintenance reviews.</p>
             <a href="#appointment">Plan skin care</a>
           </article>
         </div>
       </section>
 
-      <section class="section process">
-        <div class="process-panel">
-          <div class="section-copy">
-            <p class="eyebrow">Patient journey</p>
-            <h2>Simple steps, thoughtful supervision.</h2>
-            <p>
-              The goal is not to sell procedures. It is to understand what your skin needs and choose the least complicated route to visible, stable progress.
-            </p>
-          </div>
-          <ol class="process-list">
-            <li>
-              <span>Consult</span>
-              <p>Discuss concerns, triggers, goals, medical history, and current products.</p>
-            </li>
-            <li>
-              <span>Plan</span>
-              <p>Receive a treatment and home-care plan matched to your skin type and timeline.</p>
-            </li>
-            <li>
-              <span>Treat</span>
-              <p>Begin procedures, prescriptions, or routine corrections with clear care instructions.</p>
-            </li>
-            <li>
-              <span>Review</span>
-              <p>Track progress and adjust the plan as your skin responds.</p>
-            </li>
-          </ol>
+      <section class="section process" id="process">
+        <div class="section-heading section-heading-center">
+          <p class="eyebrow">Patient journey</p>
+          <h2>Four simple steps to better skin</h2>
+          <p>The goal is to understand what your skin needs and choose the least complicated route to visible progress.</p>
         </div>
+        <ol class="process-steps">
+          <li>
+            <span class="step-num">1</span>
+            <strong>Consult</strong>
+            <p>Discuss concerns, triggers, goals, medical history, and current products.</p>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <strong>Plan</strong>
+            <p>Receive a treatment and home-care plan matched to your skin type.</p>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <strong>Treat</strong>
+            <p>Begin procedures or prescriptions with clear care instructions.</p>
+          </li>
+          <li>
+            <span class="step-num">4</span>
+            <strong>Review</strong>
+            <p>Track progress and adjust the plan as your skin responds.</p>
+          </li>
+        </ol>
       </section>
 
       <section class="section doctor" id="doctor">
         <div class="doctor-profile">
-          <div class="doctor-photo" aria-hidden="true">
-            <span>Dr</span>
-          </div>
+          <div class="doctor-photo" aria-hidden="true"><span>Dr</span></div>
           <div>
             <p class="eyebrow">Doctor-led care</p>
             <h2>Dr. Priyanka</h2>
@@ -221,12 +345,9 @@
       </section>
 
       <section class="section results" id="results">
-        <div class="section-heading">
+        <div class="section-heading section-heading-center">
           <p class="eyebrow">Results mindset</p>
-          <h2>Designed for progress you can maintain.</h2>
-          <p>
-            Every treatment page and consultation should set clear expectations: what improves quickly, what takes time, and what needs maintenance.
-          </p>
+          <h2>Designed for progress you can maintain</h2>
         </div>
         <div class="results-grid">
           <article>
@@ -244,83 +365,29 @@
         </div>
       </section>
 
-      <section class="section testimonials">
-        <div class="section-heading">
+      <section class="section testimonials" id="testimonials">
+        <div class="section-heading section-heading-center">
           <p class="eyebrow">Patient notes</p>
-          <h2>Warm, direct, and easy to trust.</h2>
+          <h2>Warm, direct, and easy to trust</h2>
         </div>
         <div class="testimonial-grid">
           <figure>
-            <blockquote>
-              "The consultation was calm and detailed. I finally understood what was causing my acne instead of trying random products."
-            </blockquote>
+            <blockquote>"The consultation was calm and detailed. I finally understood what was causing my acne instead of trying random products."</blockquote>
             <figcaption>Acne care patient</figcaption>
           </figure>
           <figure>
-            <blockquote>
-              "My pigmentation plan was realistic and easy to follow. The follow-up helped me stay consistent."
-            </blockquote>
+            <blockquote>"My pigmentation plan was realistic and easy to follow. The follow-up helped me stay consistent."</blockquote>
             <figcaption>Pigmentation patient</figcaption>
           </figure>
           <figure>
-            <blockquote>
-              "The clinic explained every laser step clearly and the after-care instructions were simple."
-            </blockquote>
+            <blockquote>"The clinic explained every laser step clearly and the after-care instructions were simple."</blockquote>
             <figcaption>Laser care patient</figcaption>
           </figure>
         </div>
       </section>
 
-      <section class="section appointment" id="appointment">
-        <div class="appointment-copy">
-          <p class="eyebrow">Book appointment</p>
-          <h2>Tell us what you want help with.</h2>
-          <p>
-            Share your concern and preferred time. The clinic team can confirm availability and recommend the right consultation type.
-          </p>
-          <div class="contact-strip">
-            <a href="tel:+916304235143">+91 63042 35143</a>
-            <a href="mailto:hello@priyankasskincare.in">hello@priyankasskincare.in</a>
-          </div>
-        </div>
-
-        <form class="booking-form" data-booking-form>
-          <label>
-            Full name
-            <input type="text" name="name" autocomplete="name" required />
-          </label>
-          <label>
-            Phone number
-            <input type="tel" name="phone" autocomplete="tel" required />
-          </label>
-          <label>
-            Main concern
-            <select name="concern" required>
-              <option value="">Select a concern</option>
-              <option>Dermatological diseases</option>
-              <option>Skin tags removal</option>
-              <option>Warts removal</option>
-              <option>Laser hair reduction</option>
-              <option>Chemical peels</option>
-              <option>Acne, pigmentation or scars</option>
-              <option>Other skin concern</option>
-            </select>
-          </label>
-          <label>
-            Preferred day
-            <input type="text" name="preferred-day" placeholder="Example: Saturday morning" />
-          </label>
-          <label class="full-field">
-            Message
-            <textarea name="message" rows="4" placeholder="Share symptoms, goals, or current treatments"></textarea>
-          </label>
-          <button class="button button-primary full-field" type="submit">Request Appointment</button>
-          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
-        </form>
-      </section>
-
-      <section class="section faq" aria-label="Frequently asked questions">
-        <div class="section-heading">
+      <section class="section faq" id="faq" aria-label="Frequently asked questions">
+        <div class="section-heading section-heading-center">
           <p class="eyebrow">FAQ</p>
           <h2>Common questions before visiting</h2>
         </div>
@@ -337,6 +404,10 @@
             <span>Can I continue my current skincare products?</span>
             <small>Bring your current routine to the consultation. The doctor will simplify, pause, or adjust products as needed.</small>
           </button>
+          <button class="faq-item" type="button" aria-expanded="false">
+            <span>What do I need to book online?</span>
+            <small>Only your name and mobile number are required. Concern and preferred day are optional.</small>
+          </button>
         </div>
       </section>
 
@@ -344,9 +415,11 @@
         <div>
           <p class="eyebrow">Contact</p>
           <h2>Priyanka's Skin Care</h2>
-          <p class="lead">
-            A dermatology and aesthetic skincare clinic for patients who want practical advice and careful treatment planning.
-          </p>
+          <p class="lead">A dermatology and aesthetic clinic for patients who want practical advice and careful treatment planning.</p>
+          <div class="contact-strip">
+            <a href="tel:+916304235143">+91 63042 35143</a>
+            <a href="mailto:hello@priyankasskincare.in">hello@priyankasskincare.in</a>
+          </div>
         </div>
         <address>
           <strong>Clinic details</strong>
@@ -354,29 +427,11 @@
           <a href="tel:+916304235143">+91 63042 35143</a>
           <a href="mailto:hello@priyankasskincare.in">hello@priyankasskincare.in</a>
           <div class="social-links" aria-label="Social media links">
-            <a
-              class="social-icon"
-              href="https://www.instagram.com/dr.priyankasskinclinic?utm_source=qr&igsh=NDM2MWJkbGwzc3g0"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open Instagram profile"
-            >
-              <svg aria-hidden="true" viewBox="0 0 24 24">
-                <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-                <circle cx="12" cy="12" r="4"></circle>
-                <circle cx="17.4" cy="6.6" r="1"></circle>
-              </svg>
+            <a class="social-icon social-icon--instagram" href="https://www.instagram.com/dr.priyankasskinclinic?utm_source=qr&igsh=NDM2MWJkbGwzc3g0" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
             </a>
-            <a
-              class="social-icon"
-              href="https://www.facebook.com/share/1bxRrgK3gh/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open Facebook page"
-            >
-              <svg aria-hidden="true" viewBox="0 0 24 24">
-                <path d="M14 8h3V4h-3c-3 0-5 2-5 5v2H6v4h3v5h4v-5h3l1-4h-4V9c0-.6.4-1 1-1Z"></path>
-              </svg>
+            <a class="social-icon social-icon--facebook" href="https://www.facebook.com/share/1bxRrgK3gh/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
             </a>
           </div>
           <span>Mon to Sat, 10:00 AM to 1:00 PM and 6:00 PM to 8:00 PM</span>
@@ -384,8 +439,10 @@
       </section>
     </main>
 
+    <a class="sticky-cta" href="#appointment" data-sticky-cta>Book Visit</a>
+
     <footer class="site-footer">
-      <span>© <span data-year></span> Priyanka's Skin Care</span>
+      <span>&copy; <span data-year></span> Priyanka's Skin Care</span>
       <span>Medical outcomes vary by patient. Consultation is recommended before any procedure.</span>
     </footer>
 

@@ -1,9 +1,12 @@
 const header = document.querySelector("[data-header]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const nav = document.querySelector("[data-nav]");
+const stickyCta = document.querySelector("[data-sticky-cta]");
 const bookingForm = document.querySelector("[data-booking-form]");
 const formStatus = document.querySelector("[data-form-status]");
 const year = document.querySelector("[data-year]");
+
+const CLINIC_PHONE = "+91 63042 35143";
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -14,8 +17,25 @@ const syncHeader = () => {
   header.classList.toggle("is-scrolled", window.scrollY > 8);
 };
 
-syncHeader();
-window.addEventListener("scroll", syncHeader, { passive: true });
+const syncStickyCta = () => {
+  if (!stickyCta) return;
+
+  const formCard = document.querySelector("#appointment");
+  const formVisible = formCard
+    ? formCard.getBoundingClientRect().top < window.innerHeight - 24
+      && formCard.getBoundingClientRect().bottom > 24
+    : false;
+
+  stickyCta.classList.toggle("is-visible", window.scrollY > 520 && !formVisible);
+};
+
+const syncUi = () => {
+  syncHeader();
+  syncStickyCta();
+};
+
+syncUi();
+window.addEventListener("scroll", syncUi, { passive: true });
 
 if (navToggle && nav) {
   navToggle.addEventListener("click", () => {
@@ -50,6 +70,14 @@ const setFormStatus = (message, status = "") => {
   }
 };
 
+const userFacingError = (response) => {
+  if (response.status === 501 || response.status === 502) {
+    return `We couldn't submit your request online right now. Please call us at ${CLINIC_PHONE}.`;
+  }
+
+  return `Something went wrong. Please try again or call us at ${CLINIC_PHONE}.`;
+};
+
 if (bookingForm && formStatus) {
   bookingForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -81,16 +109,14 @@ if (bookingForm && formStatus) {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(data.error || "Unable to submit appointment request right now.");
+        throw new Error(userFacingError(response));
       }
 
-      const sheetSaved = data.integrations?.googleSheets?.ok;
-      const whatsappSent = data.integrations?.whatsapp?.ok;
-      const suffix = sheetSaved && whatsappSent
-        ? " We saved it to Google Sheets and sent the WhatsApp alert."
-        : " The clinic alert workflow accepted it.";
-
-      setFormStatus(`Thanks, ${payload.name}. Your appointment request has been received.${suffix}`, "success");
+      const dateLabel = data.appointment?.date || "today";
+      setFormStatus(
+        `Thanks, ${payload.name}. Your appointment request was received on ${dateLabel}. Our clinic team will call you back shortly.`,
+        "success"
+      );
       bookingForm.reset();
     } catch (error) {
       setFormStatus(error.message, "error");

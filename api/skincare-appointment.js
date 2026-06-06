@@ -1,4 +1,8 @@
 const { createSign } = require("node:crypto");
+const fs = require("node:fs/promises");
+const path = require("node:path");
+
+const localAppointmentsPath = () => path.join(__dirname, "..", "data", "skincare-appointments.jsonl");
 
 let cachedGoogleToken = "";
 let cachedGoogleTokenExpiry = 0;
@@ -17,6 +21,14 @@ const readRequestBody = async (req) => {
   }
 
   return raw ? JSON.parse(raw) : {};
+};
+
+const formatAppointmentDate = (date = new Date()) => {
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
+    dateStyle: "medium",
+    timeStyle: "short"
+  }).format(date);
 };
 
 const clean = (value, maxLength = 500) => {
@@ -124,16 +136,47 @@ const googleAccessToken = async (config) => {
   return cachedGoogleToken;
 };
 
-const appendToGoogleSheet = async (appointment) => {
-  const config = googleConfig();
-  if (config.missing.length) {
+const appendViaAppsScript = async (appointment) => {
+  const webhookUrl = String(process.env.GOOGLE_APPS_SCRIPT_URL || "").trim();
+  if (!webhookUrl) {
     return {
       ok: false,
       configured: false,
-      missing: config.missing
+      missing: ["GOOGLE_APPS_SCRIPT_URL"]
     };
   }
 
+  const response = await fetch(webhookUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      date: appointment.date,
+      name: appointment.name,
+      phone: appointment.phone,
+      concern: appointment.concern || "Not specified",
+      preferredDay: appointment.preferredDay || "",
+      message: appointment.message || "",
+      source: appointment.source,
+      createdAt: appointment.createdAt
+    }),
+    redirect: "follow"
+  });
+  const data = await jsonOrText(response);
+
+  if (!response.ok || data.ok === false) {
+    throw new Error(data.error || `Google Sheets webhook failed (${response.status})`);
+  }
+
+  return {
+    ok: true,
+    configured: true,
+    method: "apps-script"
+  };
+};
+
+const appendViaServiceAccount = async (appointment, config) => {
   const accessToken = await googleAccessToken(config);
   const url = new URL(
     `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(config.spreadsheetId)}/values/${encodeURIComponent(config.range)}:append`
@@ -149,16 +192,14 @@ const appendToGoogleSheet = async (appointment) => {
     },
     body: JSON.stringify({
       values: [[
-        appointment.createdAt,
+        appointment.date,
         appointment.name,
         appointment.phone,
-        appointment.concern,
-        appointment.preferredDay,
-        appointment.message,
+        appointment.concern || "Not specified",
+        appointment.preferredDay || "",
+        appointment.message || "",
         appointment.source,
-        appointment.pageUrl,
-        appointment.userAgent,
-        appointment.ip
+        appointment.createdAt
       ]]
     })
   });
@@ -171,8 +212,58 @@ const appendToGoogleSheet = async (appointment) => {
   return {
     ok: true,
     configured: true,
+    method: "service-account",
     updatedRange: data.updates?.updatedRange || null
   };
+};
+
+const saveLocalAppointment = async (appointment) => {
+  const filePath = localAppointmentsPath();
+  await fs.mkdir(path.dirname(filePath), { recursive: true });
+  await fs.appendFile(filePath, `${JSON.stringify(appointment)}\n`, "utf8");
+
+  return {
+    ok: true,
+    configured: true,
+    method: "local-file"
+  };
+};
+
+const googleSheetsConfigured = () => {
+  if (String(process.env.GOOGLE_APPS_SCRIPT_URL || "").trim()) {
+    return true;
+  }
+
+  return googleConfig().missing.length === 0;
+};
+
+const appendToGoogleSheet = async (appointment) => {
+  const webhookUrl = String(process.env.GOOGLE_APPS_SCRIPT_URL || "").trim();
+  if (webhookUrl) {
+    return appendViaAppsScript(appointment);
+  }
+
+  const config = googleConfig();
+  if (config.missing.length === 0) {
+    return appendViaServiceAccount(appointment, config);
+  }
+
+  if (process.env.GOOGLE_SHEETS_SPREADSHEET_ID) {
+    return {
+      ok: false,
+      configured: false,
+      missing: ["GOOGLE_APPS_SCRIPT_URL"],
+      setupSteps: [
+        "Open your Google Sheet → Extensions → Apps Script",
+        "Paste skincare/google-sheet-webhook.gs → Save",
+        "Deploy → New deployment → Web app (Execute as Me, access Anyone)",
+        "Copy the web app URL into .env.local as GOOGLE_APPS_SCRIPT_URL",
+        "Restart the server: node server.js"
+      ]
+    };
+  }
+
+  return saveLocalAppointment(appointment);
 };
 
 const whatsappConfig = () => {
@@ -206,9 +297,10 @@ const sendWhatsAppAlert = async (appointment) => {
 
   const body = [
     "New skincare appointment request",
+    `Date: ${appointment.date}`,
     `Name: ${appointment.name}`,
     `Phone: ${appointment.phone}`,
-    `Concern: ${appointment.concern}`,
+    `Concern: ${appointment.concern || "Not specified"}`,
     `Preferred day: ${appointment.preferredDay || "Not specified"}`,
     appointment.message ? `Message: ${appointment.message}` : "",
     `Source: ${appointment.source}`
@@ -265,27 +357,25 @@ module.exports = async (req, res) => {
 
   try {
     const body = await readRequestBody(req);
+    const createdAt = new Date();
     const appointment = {
-      createdAt: new Date().toISOString(),
+      createdAt: createdAt.toISOString(),
+      date: formatAppointmentDate(createdAt),
       name: clean(body.name, 120),
       phone: clean(body.phone, 32),
       concern: clean(body.concern, 160),
       preferredDay: clean(body.preferredDay, 160),
       message: clean(body.message, 900),
-      source: clean(body.source || "Priyanka's Skin Care website", 160),
-      pageUrl: clean(body.pageUrl, 300),
-      userAgent: clean(req.headers["user-agent"], 240),
-      ip: clean(req.headers["x-forwarded-for"] || req.socket.remoteAddress, 80)
+      source: clean(body.source || "Priyanka's Skin Care website", 160)
     };
 
     const missingFields = [];
     if (!appointment.name) missingFields.push("name");
     if (!appointment.phone) missingFields.push("phone");
-    if (!appointment.concern) missingFields.push("concern");
 
     if (missingFields.length) {
       jsonResponse(res, 400, {
-        error: "Missing required appointment fields",
+        error: "Name and phone number are required",
         missingFields
       });
       return;
@@ -299,20 +389,26 @@ module.exports = async (req, res) => {
       googleSheets,
       whatsapp
     };
-    const anyConfigured = googleSheets.configured || whatsapp.configured;
-    const anySucceeded = googleSheets.ok || whatsapp.ok;
+    const whatsappIsConfigured = whatsapp.configured;
+    const sheetsIsConfigured = googleSheetsConfigured();
 
-    if (!anyConfigured) {
-      jsonResponse(res, 501, {
-        error: "Appointment integrations are not configured",
+    if (!googleSheets.ok) {
+      const statusCode = googleSheets.configured ? 502 : 501;
+      jsonResponse(res, statusCode, {
+        error: googleSheets.error
+          || (googleSheets.configured
+            ? "Could not save the appointment to Google Sheets"
+            : "Google Sheets is not connected yet"),
+        setupSteps: googleSheets.setupSteps,
+        missing: googleSheets.missing,
         integrations
       });
       return;
     }
 
-    if (!anySucceeded) {
+    if (whatsappIsConfigured && !whatsapp.ok) {
       jsonResponse(res, 502, {
-        error: "Appointment integrations failed",
+        error: whatsapp.error || "Could not send the WhatsApp alert",
         integrations
       });
       return;
@@ -321,9 +417,9 @@ module.exports = async (req, res) => {
     jsonResponse(res, 200, {
       message: "Appointment request received",
       appointment: {
-        createdAt: appointment.createdAt,
+        date: appointment.date,
         name: appointment.name,
-        concern: appointment.concern
+        phone: appointment.phone
       },
       integrations
     });
