@@ -1641,40 +1641,65 @@ h3 {
 
 .contact {
   display: grid;
-  grid-template-columns: minmax(280px, 0.9fr) minmax(280px, 0.6fr);
-  gap: clamp(28px, 5vw, 80px);
+  grid-template-columns: minmax(280px, 1fr) minmax(280px, 0.85fr);
+  gap: clamp(24px, 4vw, 48px);
   align-items: start;
   background: #fff9fc;
 }
 
-address {
+.contact-intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.contact-card {
   display: grid;
-  gap: 10px;
+  gap: 16px;
   padding: 24px;
   font-style: normal;
   background: #ffffff;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow: 0 10px 28px rgba(91, 42, 115, 0.06);
 }
 
-address strong {
+.contact-card strong {
   color: var(--teal-dark);
+  font-size: 1.05rem;
 }
 
-address a,
-address span {
+.contact-detail {
+  display: grid;
+  gap: 4px;
+}
+
+.contact-detail-label {
+  color: var(--rose);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.contact-detail a,
+.contact-detail span {
   color: var(--muted);
+  font-size: 0.96rem;
+  font-weight: 600;
+  line-height: 1.45;
 }
 
-.contact-callback-link {
-  padding: 0;
+.contact-detail a {
   color: var(--teal-dark);
-  font: inherit;
   font-weight: 800;
-  text-decoration: underline;
-  cursor: pointer;
-  background: none;
-  border: none;
+}
+
+.contact-card .social-links {
+  margin-top: 4px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
 }
 
 .contact-map {
@@ -1965,12 +1990,12 @@ address span {
   }
 
   .hero-actions,
-  .contact-strip {
+  .contact-intro-actions {
     display: grid;
   }
 
   .hero-actions .button,
-  .contact-strip a {
+  .contact-intro-actions .button {
     width: 100%;
   }
 

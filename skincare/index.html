@@ -42,6 +42,7 @@
         <a href="#doctor">Doctor</a>
         <a href="#testimonials">Reviews</a>
         <a href="#faq">FAQ</a>
+        <a href="#contact">Contact Us</a>
         <div class="nav-mobile-socials">
           <a
             class="nav-social nav-social--instagram"
@@ -390,20 +391,29 @@
       </section>
 
       <section class="section contact" id="contact">
-        <div>
+        <div class="contact-intro">
           <p class="eyebrow">Contact</p>
           <h2>Priyanka's Skin Care</h2>
           <p class="lead">A dermatology and aesthetic clinic for patients who want practical advice and careful treatment planning.</p>
-          <div class="contact-strip">
-            <a href="tel:+916304235143">+91 63042 35143</a>
-            <a href="mailto:hello@priyankasskincare.in">hello@priyankasskincare.in</a>
+          <div class="contact-intro-actions">
+            <a class="button button-primary" href="tel:+916304235143">Call +91 63042 35143</a>
+            <button class="button button-secondary" type="button" data-open-callback>Request Callback</button>
           </div>
         </div>
-        <address>
+        <address class="contact-card">
           <strong>Clinic details</strong>
-          <a href="https://maps.google.com/?q=17.402554,78.389091" target="_blank" rel="noopener noreferrer">HIG-82, Tanasha Nagar Colony, Manikonda, 500089</a>
-          <a href="tel:+916304235143">+91 63042 35143</a>
-          <a href="mailto:hello@priyankasskincare.in">hello@priyankasskincare.in</a>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Address</span>
+            <a href="https://maps.google.com/?q=17.402554,78.389091" target="_blank" rel="noopener noreferrer">HIG-82, Tanasha Nagar Colony, Manikonda, Hyderabad, Telangana 500089</a>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Hours</span>
+            <span>Mon to Sat, 10:00 AM to 1:00 PM and 6:00 PM to 8:00 PM</span>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Consultations</span>
+            <span>Offline &amp; online consultations available.</span>
+          </div>
           <div class="social-links" aria-label="Social media links">
             <a class="social-icon social-icon--instagram" href="https://www.instagram.com/dr.priyankasskinclinic?utm_source=qr&igsh=NDM2MWJkbGwzc3g0" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
@@ -412,8 +422,6 @@
               <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
             </a>
           </div>
-          <span>Mon to Sat, 10:00 AM to 1:00 PM and 6:00 PM to 8:00 PM</span>
-          <span>Offline &amp; online consultations available. Call <a href="tel:+916304235143">+91 63042 35143</a> or <button class="contact-callback-link" type="button" data-open-callback>request a callback</button>.</span>
         </address>
         <div class="contact-map">
           <iframe
@@ -490,8 +498,9 @@
         "telephone": "+916304235143",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "HIG-82, Tanasha Nagar Colony",
-          "addressLocality": "Manikonda, Hyderabad",
+          "streetAddress": "HIG-82, Tanasha Nagar Colony, Manikonda",
+          "addressLocality": "Hyderabad",
+          "addressRegion": "Telangana",
           "postalCode": "500089",
           "addressCountry": "IN"
         },
