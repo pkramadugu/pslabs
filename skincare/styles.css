@@ -215,6 +215,69 @@ textarea {
   display: none;
 }
 
+.clinic-gallery {
+  padding: clamp(20px, 3vw, 32px) clamp(18px, 4vw, 58px);
+  background: var(--mist);
+  border-bottom: 1px solid var(--line);
+}
+
+.clinic-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 20px);
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.clinic-gallery-card {
+  margin: 0;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 20px rgba(91, 42, 115, 0.06);
+}
+
+.clinic-gallery-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+}
+
+.clinic-gallery-card figcaption {
+  padding: 12px 14px;
+  color: var(--teal-dark);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.gallery-page .gallery-intro {
+  padding-bottom: 0;
+}
+
+.gallery-page .gallery-intro h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.gallery-page .gallery-intro p:not(.eyebrow) {
+  max-width: 52ch;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
+.clinic-gallery--page {
+  padding-top: clamp(24px, 4vw, 40px);
+}
+
+.main-nav a[aria-current="page"] {
+  color: var(--teal-dark);
+  background: var(--mist);
+  border-color: var(--line);
+}
+
 .promo-carousel-controls {
   position: absolute;
   right: 0;
@@ -1410,24 +1473,55 @@ h3 {
   display: grid;
   grid-template-columns: minmax(220px, 360px) minmax(280px, 680px);
   gap: clamp(30px, 6vw, 92px);
-  align-items: center;
+  align-items: start;
 }
 
 .doctor-photo {
   aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  color: #ffffff;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   background:
     linear-gradient(135deg, rgba(91, 42, 115, 0.95), rgba(217, 108, 153, 0.9)),
     var(--teal);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
 }
 
-.doctor-photo span {
-  font-size: clamp(4rem, 9vw, 7rem);
-  font-weight: 900;
+.doctor-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.doctor-bio p {
+  margin: 0 0 1rem;
+  color: #51385d;
+  line-height: 1.7;
+}
+
+.doctor-bio h2 {
+  margin-bottom: 1.25rem;
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.doctor-subheading {
+  margin: 1.75rem 0 0.75rem;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.doctor-quote {
+  margin: 1.75rem 0 0;
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid var(--teal);
+  border-radius: var(--radius);
+  background: var(--mist);
+  color: #51385d;
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.7;
 }
 
 .credential-list {
@@ -1511,6 +1605,50 @@ h3 {
   margin-top: 24px;
   color: var(--teal-dark);
   font-weight: 900;
+}
+
+.testimonial-tag {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 6px 10px;
+  color: var(--teal-dark);
+  background: var(--mist);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.testimonials-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: clamp(28px, 4vw, 40px);
+}
+
+.testimonials-page .testimonials-intro {
+  padding-bottom: 0;
+}
+
+.testimonials-page .testimonials-intro h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.testimonials-page .testimonials-intro p:not(.eyebrow) {
+  max-width: 52ch;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
+.testimonials--page {
+  padding-top: clamp(24px, 4vw, 40px);
+}
+
+.testimonial-grid--page {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .appointment {
@@ -1808,6 +1946,19 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .doctor-profile {
+    justify-items: center;
+  }
+
+  .doctor-photo {
+    width: min(300px, 100%);
+    margin-inline: auto;
+  }
+
+  .doctor-bio {
+    width: 100%;
+  }
+
   .contact-location {
     display: grid;
     order: -1;
@@ -1842,29 +1993,45 @@ h3 {
     display: flex;
     flex: 1 1 100%;
     order: 3;
-    flex-wrap: nowrap;
     align-items: center;
-    justify-content: space-between;
-    gap: 6px;
-    padding: 8px 0 10px;
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+    padding: 10px 0 12px;
     border-top: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .mobile-nav-links {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .mobile-nav-links::-webkit-scrollbar {
+    display: none;
   }
 
   .mobile-nav-strip a:not(.nav-social) {
-    flex: 1 1 0;
-    min-width: 0;
-    max-height: 36px;
-    min-height: 32px;
+    flex: 0 0 auto;
+    min-height: 40px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 4px;
+    padding: 0 14px;
     border: 1px solid var(--line);
     border-radius: 999px;
     background: var(--mist);
     color: #493453;
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     font-weight: 800;
+    line-height: 1.15;
     white-space: nowrap;
     text-align: center;
   }
@@ -1875,20 +2042,19 @@ h3 {
     flex-shrink: 0;
     align-items: center;
     gap: 8px;
-    margin-left: 4px;
   }
 
   .mobile-nav-strip .nav-social {
     display: inline-flex;
-    flex: 0 0 36px;
+    flex: 0 0 38px;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    min-width: 36px;
-    max-width: 36px;
-    height: 36px;
-    min-height: 36px;
-    max-height: 36px;
+    width: 38px;
+    min-width: 38px;
+    max-width: 38px;
+    height: 38px;
+    min-height: 38px;
+    max-height: 38px;
     aspect-ratio: 1 / 1;
     flex-shrink: 0;
     padding: 0;
@@ -2147,6 +2313,10 @@ h3 {
 }
 
 @media (max-width: 640px) {
+  body {
+    padding-bottom: 76px;
+  }
+
   .top-bar {
     gap: 8px;
     padding: 8px clamp(16px, 4vw, 24px);
@@ -2178,11 +2348,6 @@ h3 {
     text-align: center;
   }
 
-  .promo-slide {
-    aspect-ratio: 5 / 3;
-    min-height: 200px;
-  }
-
   .promo-tag {
     font-size: 0.72rem;
   }
@@ -2191,7 +2356,12 @@ h3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .clinic-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
   .top-bar,
+  .clinic-gallery,
   .quick-care,
   .site-footer,
   .site-header {
@@ -2237,37 +2407,108 @@ h3 {
   .sticky-cta {
     right: 16px;
     bottom: 16px;
-    left: auto;
+    left: 16px;
     min-height: 44px;
     padding: 0 18px;
-    font-size: 0.88rem;
+    font-size: 0.86rem;
+    justify-content: center;
   }
 
   .site-header {
     min-height: 0;
     padding: 10px clamp(16px, 4vw, 24px) 0;
+    gap: 8px 10px;
   }
 
   html {
-    scroll-padding-top: 132px;
+    scroll-padding-top: 168px;
   }
 
   .brand {
-    max-width: calc(100% - 60px);
+    flex: 1 1 auto;
+    max-width: calc(100% - 56px);
+    max-height: none;
     padding: 4px 10px 4px 4px;
   }
 
   .brand-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand strong {
+    font-size: 0.88rem;
+    line-height: 1.2;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .brand small {
+    font-size: 0.58rem;
+  }
+
+  .nav-toggle {
+    flex: 0 0 44px;
     width: 44px;
     height: 44px;
   }
 
-  .brand strong {
-    font-size: 0.95rem;
+  .mobile-nav-strip {
+    gap: 8px;
+    padding: 8px 0 10px;
   }
 
-  .brand small {
-    font-size: 0.62rem;
+  .mobile-nav-strip a:not(.nav-social) {
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 0.78rem;
+  }
+
+  .mobile-nav-strip .nav-social {
+    flex-basis: 36px;
+    width: 36px;
+    min-width: 36px;
+    max-width: 36px;
+    height: 36px;
+    min-height: 36px;
+    max-height: 36px;
+  }
+
+  .promo-carousel-controls,
+  .promo-mobile-ctas {
+    padding-inline: clamp(16px, 4vw, 24px);
+  }
+
+  .promo-slide {
+    aspect-ratio: 4 / 3;
+    min-height: 180px;
+  }
+
+  .promo-slide-copy {
+    padding: 12px clamp(16px, 4vw, 24px) 18px;
+  }
+
+  .promo-slide strong {
+    font-size: clamp(1rem, 4.8vw, 1.25rem);
+  }
+
+  .quick-care {
+    padding-block: 20px;
+  }
+
+  .quick-care-card {
+    min-height: 96px;
+    padding: 14px 10px;
+    font-size: 0.8rem;
+  }
+
+  .quick-care-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
   }
 
   .hero {
@@ -2284,17 +2525,33 @@ h3 {
   }
 
   h2 {
-    font-size: clamp(1.65rem, 7.5vw, 2.35rem);
+    font-size: clamp(1.35rem, 6vw, 1.85rem);
+  }
+
+  .doctor-bio h2 {
+    font-size: clamp(1.2rem, 4.8vw, 1.5rem);
   }
 
   .section-heading,
   .section-heading-center {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
+  }
+
+  .section-heading p:not(.eyebrow),
+  .section-heading-center p:not(.eyebrow) {
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 
   .hero-actions,
-  .contact-intro-actions {
+  .contact-intro-actions,
+  .testimonials-cta {
     display: grid;
+    gap: 10px;
+  }
+
+  .testimonials-cta .button {
+    width: 100%;
   }
 
   .hero-actions .button,
@@ -2317,11 +2574,16 @@ h3 {
   }
 
   .doctor-photo {
-    max-width: 280px;
+    max-width: min(260px, 100%);
   }
 
   .section {
-    padding: clamp(56px, 10vw, 80px) clamp(16px, 4vw, 24px);
+    padding: clamp(40px, 8vw, 64px) clamp(16px, 4vw, 24px);
+  }
+
+  .doctor-quote {
+    font-size: 0.95rem;
+    padding: 1rem 1.1rem;
   }
 
   .highlight-card,
@@ -2329,13 +2591,30 @@ h3 {
   .treatment-card,
   .intro-grid article,
   .testimonial-grid figure {
-    padding: 20px;
+    padding: 18px;
+  }
+
+  .testimonial-grid figure {
+    min-height: 0;
+  }
+
+  .faq-item {
+    padding: 16px 18px;
   }
 
   .site-footer {
-    padding: 24px clamp(16px, 4vw, 24px);
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px clamp(16px, 4vw, 24px);
     justify-content: center;
     text-align: center;
+    font-size: 0.84rem;
+  }
+
+  .callback-modal-panel {
+    width: min(100%, calc(100vw - 24px));
+    margin: 12px;
   }
 
   .main-nav a:not(.nav-social) {
