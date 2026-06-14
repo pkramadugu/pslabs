@@ -27,8 +27,14 @@ const syncHeader = () => {
   header.classList.toggle("is-scrolled", window.scrollY > 8);
 };
 
+const mobileStickyQuery = window.matchMedia("(max-width: 900px)");
+
+const syncMobileStickyMode = () => {
+  document.documentElement.classList.toggle("has-mobile-sticky-ctas", mobileStickyQuery.matches);
+};
+
 const syncStickyCta = () => {
-  const visible = window.scrollY > 520;
+  const visible = mobileStickyQuery.matches || window.scrollY > 520;
   if (stickyActions) {
     stickyActions.classList.toggle("is-visible", visible);
   }
@@ -45,11 +51,13 @@ document.querySelectorAll("[data-whatsapp-book]").forEach((link) => {
 
 const syncUi = () => {
   syncHeader();
+  syncMobileStickyMode();
   syncStickyCta();
 };
 
 syncUi();
 window.addEventListener("scroll", syncUi, { passive: true });
+mobileStickyQuery.addEventListener("change", syncUi);
 
 if (navToggle && nav) {
   const setNavOpen = (isOpen) => {
