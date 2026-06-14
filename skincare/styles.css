@@ -70,7 +70,8 @@ textarea {
 
 .top-bar-label,
 .top-bar-call,
-.top-bar-book {
+.top-bar-book,
+.top-bar-whatsapp {
   height: 28px;
   min-height: 28px;
   display: inline-flex;
@@ -119,6 +120,17 @@ textarea {
 .top-bar-book:hover {
   color: #ffffff;
   background: var(--teal);
+}
+
+.top-bar-whatsapp {
+  color: #ffffff;
+  background: #25d366;
+  border: 1px solid #1da851;
+}
+
+.top-bar-whatsapp:hover {
+  color: #ffffff;
+  background: #20bd5a;
 }
 
 .promo-carousel {
@@ -992,16 +1004,35 @@ body.nav-open::before {
   width: 100%;
 }
 
-.sticky-cta {
+.sticky-actions {
   position: fixed;
   right: 24px;
   bottom: 24px;
+  left: 24px;
   z-index: 30;
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.sticky-actions.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.sticky-cta {
+  position: static;
+  flex: 1 1 0;
+  min-width: 0;
   min-height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 22px;
+  padding: 0 16px;
   cursor: pointer;
   color: #ffffff;
   background: var(--teal-dark);
@@ -1011,10 +1042,18 @@ body.nav-open::before {
     0 10px 28px rgba(91, 42, 115, 0.32),
     0 0 0 1px rgba(91, 42, 115, 0.08);
   font-weight: 900;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(12px);
-  transition: opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+  transition: background 180ms ease, box-shadow 180ms ease;
+}
+
+.sticky-whatsapp {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 48px;
+  justify-content: center;
+  font-size: 0.88rem;
 }
 
 .sticky-cta:hover {
@@ -1022,12 +1061,6 @@ body.nav-open::before {
   box-shadow:
     0 14px 32px rgba(91, 42, 115, 0.36),
     0 0 0 1px rgba(91, 42, 115, 0.1);
-}
-
-.sticky-cta.is-visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
 }
 
 .section-heading-center {
@@ -1268,6 +1301,17 @@ h3 {
   color: var(--teal-dark);
   background: rgba(255, 255, 255, 0.78);
   border-color: rgba(91, 42, 115, 0.24);
+}
+
+.button-whatsapp {
+  color: #ffffff;
+  background: #25d366;
+  border: 1px solid #1da851;
+}
+
+.button-whatsapp:hover {
+  color: #ffffff;
+  background: #20bd5a;
 }
 
 .quick-care {
@@ -2154,7 +2198,7 @@ h3 {
 
   .promo-mobile-ctas {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 10px;
     padding: 0 16px 14px;
     background: var(--paper);
@@ -2162,7 +2206,12 @@ h3 {
 
   .promo-mobile-ctas .button {
     min-height: 42px;
+    height: auto;
+    padding: 10px 14px;
     font-size: 0.84rem;
+    line-height: 1.2;
+    white-space: normal;
+    text-align: center;
   }
 
   .contact-location {
@@ -2312,9 +2361,34 @@ h3 {
   }
 }
 
+@media (max-width: 900px) {
+  .top-bar-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .top-bar-call,
+  .top-bar-book,
+  .top-bar-whatsapp {
+    flex: 1 1 calc(50% - 4px);
+    min-width: 0;
+    padding: 8px 10px;
+    height: auto;
+    min-height: 36px;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .top-bar-book {
+    flex-basis: 100%;
+  }
+}
+
 @media (max-width: 640px) {
   body {
-    padding-bottom: 76px;
+    padding-bottom: 108px;
   }
 
   .top-bar {
@@ -2336,13 +2410,18 @@ h3 {
     width: 100%;
   }
 
-  .top-bar-call,
   .top-bar-book {
+    grid-column: 1 / -1;
+  }
+
+  .top-bar-call,
+  .top-bar-book,
+  .top-bar-whatsapp {
     width: 100%;
-    min-height: 32px;
+    min-height: 36px;
     height: auto;
-    padding: 6px 10px;
-    font-size: 0.72rem;
+    padding: 8px 10px;
+    font-size: 0.78rem;
     line-height: 1.2;
     white-space: normal;
     text-align: center;
@@ -2404,14 +2483,29 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .sticky-cta {
+  .sticky-actions {
     right: 16px;
     bottom: 16px;
     left: 16px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sticky-cta,
+  .sticky-whatsapp {
+    flex: none;
+    width: 100%;
     min-height: 44px;
-    padding: 0 18px;
-    font-size: 0.86rem;
-    justify-content: center;
+    height: auto;
+    padding: 10px 14px;
+    font-size: 0.84rem;
+    line-height: 1.2;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .contact-intro-actions .button-whatsapp {
+    order: -1;
   }
 
   .site-header {
@@ -2421,7 +2515,7 @@ h3 {
   }
 
   html {
-    scroll-padding-top: 168px;
+    scroll-padding-top: 188px;
   }
 
   .brand {

@@ -1,6 +1,7 @@
 const header = document.querySelector("[data-header]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const nav = document.querySelector("[data-nav]");
+const stickyActions = document.querySelector("[data-sticky-actions]");
 const stickyCta = document.querySelector("[data-sticky-cta]");
 const callbackModal = document.querySelector("[data-callback-modal]");
 const callbackTriggers = document.querySelectorAll("[data-open-callback]");
@@ -9,6 +10,9 @@ const callbackForms = document.querySelectorAll("[data-callback-form]");
 const year = document.querySelector("[data-year]");
 
 const CLINIC_PHONE = "+91 63042 35143";
+const WHATSAPP_BOOK_URL = `https://wa.me/916304235143?text=${encodeURIComponent(
+  "Hello, I would like to book an appointment at Dr. Priyanka's Skin Care."
+)}`;
 const promoCarousel = document.querySelector("[data-promo-carousel]");
 const promoTrack = document.querySelector("[data-promo-track]");
 const promoSlides = document.querySelectorAll("[data-promo-slide]");
@@ -24,9 +28,20 @@ const syncHeader = () => {
 };
 
 const syncStickyCta = () => {
-  if (!stickyCta) return;
-  stickyCta.classList.toggle("is-visible", window.scrollY > 520);
+  const visible = window.scrollY > 520;
+  if (stickyActions) {
+    stickyActions.classList.toggle("is-visible", visible);
+  }
+  if (stickyCta) {
+    stickyCta.classList.toggle("is-visible", visible);
+  }
 };
+
+document.querySelectorAll("[data-whatsapp-book]").forEach((link) => {
+  link.href = WHATSAPP_BOOK_URL;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+});
 
 const syncUi = () => {
   syncHeader();
