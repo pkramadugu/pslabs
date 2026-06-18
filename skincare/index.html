@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dr. Priyanka's Skin Clinic | Dermatology & Aesthetic Clinic</title>
+    <title>Dermatologist in Manikonda, Hyderabad | Dr. Priyanka's Skin Clinic</title>
     <meta
       name="description"
-      content="Dr. Priyanka's Skin Clinic offers dermatologist-led skin, hair, laser, anti-aging, and aesthetic treatments with careful diagnosis and personalized plans."
+      content="Consult a dermatologist in Manikonda, Hyderabad. Acne, pigmentation, laser, peels and skincare by Dr. Priyanka (DDVL). Book online or call +91 63042 35143."
     />
     <meta name="theme-color" content="#5b2a73" />
     <link rel="canonical" href="https://pslabs.in/skincare/" />
-    <meta property="og:title" content="Dr. Priyanka's Skin Clinic" />
-    <meta property="og:description" content="Dermatologist-led skincare, laser, and aesthetic treatments." />
+    <meta property="og:title" content="Dermatologist in Manikonda, Hyderabad | Dr. Priyanka's Skin Clinic" />
+    <meta property="og:description" content="Trusted derma doctor in Hyderabad for acne, pigmentation, laser hair reduction, peels and doctor-led skincare." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pslabs.in/skincare/" />
     <meta property="og:image" content="https://pslabs.in/skincare/assets/clinic-hero.png" />
@@ -32,7 +32,7 @@
 
     <header class="site-header" data-header>
       <a class="brand" href="/skincare/" aria-label="Dr. Priyanka's Skin Clinic home">
-        <img class="brand-logo" src="assets/skincare-logo.jpg" alt="" />
+        <img class="brand-logo" src="assets/skincare-logo.jpg" alt="Dr. Priyanka's Skin Clinic — dermatologist in Manikonda, Hyderabad" />
         <span>
           <strong>Dr. Priyanka's Skin Clinic</strong>
           <small>Dermatology &amp; Aesthetics</small>
@@ -118,6 +118,7 @@
     </header>
 
     <main id="home">
+      <h1 class="sr-only">Dr. Priyanka's Skin Clinic — Dermatologist in Manikonda, Hyderabad</h1>
       <div class="promo-marquee" aria-hidden="true">
         <div class="promo-marquee-track">
           <span>Dermatology</span>
@@ -490,6 +491,10 @@
             <span>What do I need to request a callback?</span>
             <small>Only your name and mobile number are required to request a callback.</small>
           </button>
+          <button class="faq-item" type="button" aria-expanded="false">
+            <span>Where is the clinic located?</span>
+            <small>HIG-82, Tanasha Nagar Colony, Manikonda, Hyderabad 500089 — convenient for Manikonda, Gachibowli, and nearby areas.</small>
+          </button>
         </div>
       </section>
 
@@ -600,29 +605,104 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "MedicalClinic",
-        "name": "Dr. Priyanka's Skin Clinic",
-        "url": "https://pslabs.in/skincare/",
-        "logo": "https://pslabs.in/skincare/assets/skincare-logo.jpg",
-        "medicalSpecialty": ["Dermatology", "CosmeticDermatology"],
-        "openingHours": ["Mo-Sa 10:00-13:00", "Mo-Sa 18:00-20:00"],
-        "description": "Offline and online consultations available. Call +91 63042 35143 or request a callback.",
-        "telephone": "+916304235143",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "HIG-82, Tanasha Nagar Colony, Manikonda",
-          "addressLocality": "Hyderabad",
-          "addressRegion": "Telangana",
-          "postalCode": "500089",
-          "addressCountry": "IN"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 17.402554,
-          "longitude": 78.389091
-        },
-        "hasMap": "https://maps.google.com/?q=17.402554,78.389091",
-        "priceRange": "$$"
+        "@graph": [
+          {
+            "@type": "MedicalClinic",
+            "@id": "https://pslabs.in/skincare/#clinic",
+            "name": "Dr. Priyanka's Skin Clinic",
+            "url": "https://pslabs.in/skincare/",
+            "logo": "https://pslabs.in/skincare/assets/skincare-logo.jpg",
+            "image": "https://pslabs.in/skincare/assets/clinic-hero.png",
+            "medicalSpecialty": ["Dermatology", "CosmeticDermatology"],
+            "openingHours": ["Mo-Sa 10:00-13:00", "Mo-Sa 18:00-20:00"],
+            "description": "Dermatologist and derma doctor in Manikonda, Hyderabad. Offline and online consultations for acne, pigmentation, laser, peels and skincare.",
+            "telephone": "+916304235143",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "HIG-82, Tanasha Nagar Colony, Manikonda",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "postalCode": "500089",
+              "addressCountry": "IN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 17.402554,
+              "longitude": 78.389091
+            },
+            "hasMap": "https://maps.google.com/?q=17.402554,78.389091",
+            "priceRange": "$$",
+            "employee": { "@id": "https://pslabs.in/skincare/#physician" }
+          },
+          {
+            "@type": "Physician",
+            "@id": "https://pslabs.in/skincare/#physician",
+            "name": "Dr. Priyanka Ramadugu",
+            "honorificPrefix": "Dr.",
+            "jobTitle": "Consultant Dermatologist",
+            "medicalSpecialty": "Dermatology",
+            "image": "https://pslabs.in/skincare/assets/dr-priyanka.jpg",
+            "url": "https://pslabs.in/skincare/#doctor",
+            "worksFor": { "@id": "https://pslabs.in/skincare/#clinic" },
+            "hasCredential": [
+              {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": "degree",
+                "name": "MBBS"
+              },
+              {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": "degree",
+                "name": "DDVL (Diploma in Dermatology, Venereology and Leprosy)"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Do I need a consultation before laser or peels?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. A consultation helps check skin type, triggers, current products, and procedure suitability."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How soon will acne or pigmentation improve?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Some changes can appear within weeks, but stable results usually need consistent care and reviews."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I continue my current skincare products?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Bring your current routine to the consultation. The doctor will simplify, pause, or adjust products as needed."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What do I need to request a callback?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Only your name and mobile number are required to request a callback."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Where is the clinic located?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Dr. Priyanka's Skin Clinic is at HIG-82, Tanasha Nagar Colony, Manikonda, Hyderabad 500089 — convenient for Manikonda, Gachibowli, and nearby areas."
+                }
+              }
+            ]
+          }
+        ]
       }
     </script>
     <script src="script.js"></script>

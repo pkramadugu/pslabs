@@ -37,7 +37,9 @@ const contentTypes = {
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".svg": "image/svg+xml",
-  ".ico": "image/x-icon"
+  ".ico": "image/x-icon",
+  ".xml": "application/xml; charset=utf-8",
+  ".txt": "text/plain; charset=utf-8"
 };
 
 const send = (res, statusCode, body, contentType = "text/plain; charset=utf-8") => {
@@ -63,6 +65,10 @@ const fileForUrl = (urlPath) => {
   const normalized = path.normalize(safePath).replace(/^(\.\.[/\\])+/, "");
   const relative = normalized === "/" ? "index.html" : normalized.replace(/^[/\\]/, "");
   return relative.endsWith("/") ? path.join(root, relative, "index.html") : path.join(root, relative);
+};
+
+const isSeoRootFile = (pathname) => {
+  return pathname === "/robots.txt" || pathname === "/sitemap.xml";
 };
 
 const serveStatic = async (req, res) => {
@@ -105,7 +111,7 @@ loadLocalEnv().then(() => {
       return;
     }
 
-    if (isSkincarePath(pathname)) {
+    if (isSkincarePath(pathname) || isSeoRootFile(pathname)) {
       await serveStatic(req, res);
       return;
     }

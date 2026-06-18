@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pslabs.in/sitemap.xml

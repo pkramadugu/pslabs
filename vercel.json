@@ -3,7 +3,7 @@
     { "source": "/", "destination": "/skincare/", "permanent": true },
     { "source": "/skincare", "destination": "/skincare/", "permanent": true },
     {
-      "source": "/:path((?!skincare|api).*)",
+      "source": "/:path((?!skincare|api|robots\\.txt|sitemap\\.xml).*)",
       "destination": "/skincare/",
       "permanent": true
     }
