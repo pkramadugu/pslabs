@@ -1,4 +1,4 @@
-# Priyanka's Skin Care Website
+# Dr. Priyanka's Skin Clinic Website
 
 Static website for `https://pslabs.in/skincare/`.
 

@@ -1,5 +1,5 @@
 /**
- * Priyanka's Skin Care — Google Sheet webhook
+ * Dr. Priyanka's Skin Clinic — Google Sheet webhook
  *
  * Setup:
  * 1. Open https://docs.google.com/spreadsheets/d/1OkL7JXwzkd-zBxWs2Mm-yFefez_nZj3xF4xSXxQppFo/edit
@@ -35,7 +35,7 @@ function doGet() {
   return ContentService
     .createTextOutput(JSON.stringify({
       ok: true,
-      message: "Priyanka's Skin Care appointment webhook is ready. Use POST to submit bookings."
+      message: "Dr. Priyanka's Skin Clinic appointment webhook is ready. Use POST to submit bookings."
     }))
     .setMimeType(ContentService.MimeType.JSON);
 }

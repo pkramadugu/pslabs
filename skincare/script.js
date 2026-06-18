@@ -11,7 +11,7 @@ const year = document.querySelector("[data-year]");
 
 const CLINIC_PHONE = "+91 63042 35143";
 const WHATSAPP_BOOK_URL = `https://wa.me/916304235143?text=${encodeURIComponent(
-  "Hello, I would like to book an appointment at Dr. Priyanka's Skin Care."
+  "Hello, I would like to book an appointment at Dr. Priyanka's Skin Clinic."
 )}`;
 const promoCarousel = document.querySelector("[data-promo-carousel]");
 const promoTrack = document.querySelector("[data-promo-track]");
@@ -303,7 +303,7 @@ callbackForms.forEach((form) => {
     const payload = {
       name,
       phone,
-      source: "Dr. Priyanka's Skin Care callback form",
+      source: "Dr. Priyanka's Skin Clinic callback form",
       pageUrl: window.location.href
     };
 

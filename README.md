@@ -6,7 +6,7 @@ Static prototype for `https://pslabs.in/` with service pages.
 
 - `/`: PSLabs homepage covering software consulting, digital products, diagnostics at home, and skincare consultation.
 - `/diagnostics/`: Diagnostics at-home booking page with a Thyrocare staging API integration scaffold.
-- `/skincare/`: Priyanka's Skin Care landing page and consultation flow.
+- `/skincare/`: Dr. Priyanka's Skin Clinic landing page and consultation flow.
 
 ## Thyrocare Integration
 

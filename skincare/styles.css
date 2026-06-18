@@ -949,6 +949,37 @@ body.nav-open::before {
 .stat-card-highlight {
   background: linear-gradient(135deg, #fff6fb 0%, #f8e8f5 100%);
   border-color: #e8b8dc;
+  border-width: 2px;
+}
+
+.stat-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.stat-card-link:hover {
+  transform: translateY(-3px);
+  border-color: var(--teal);
+  box-shadow: 0 14px 32px rgba(91, 42, 115, 0.16);
+}
+
+.stat-card-link:focus-visible {
+  outline: 3px solid rgba(91, 42, 115, 0.35);
+  outline-offset: 3px;
+}
+
+.stat-card-cta {
+  display: block;
+  margin-top: 12px;
+  color: var(--teal-dark);
+  font-size: 0.8rem;
+  font-weight: 900;
 }
 
 .stat-label {
@@ -964,8 +995,9 @@ body.nav-open::before {
   display: block;
   margin-top: 6px;
   color: var(--teal-dark);
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   line-height: 1.2;
+  font-weight: 900;
 }
 
 .stat-card small {
@@ -973,6 +1005,17 @@ body.nav-open::before {
   margin-top: 6px;
   color: var(--muted);
   font-size: 0.78rem;
+}
+
+.clinic-stats {
+  padding: clamp(20px, 4vw, 32px) clamp(18px, 4vw, 58px);
+  background: linear-gradient(180deg, #fff6fb 0%, var(--mist) 100%);
+  border-block: 2px solid #e8b8dc;
+}
+
+.stat-grid--home {
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 .badge-accent {
@@ -1755,6 +1798,18 @@ h3 {
   text-transform: uppercase;
 }
 
+.testimonial-stars {
+  margin-bottom: 12px;
+  color: #f5b301;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.testimonial-grid blockquote {
+  flex: 1 1 auto;
+}
+
 .testimonials-cta {
   display: flex;
   flex-wrap: wrap;
@@ -1782,7 +1837,11 @@ h3 {
 }
 
 .testimonial-grid--page {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.testimonial-grid--featured {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .appointment {
@@ -2295,6 +2354,10 @@ h3 {
     background: var(--paper);
   }
 
+  .promo-mobile-ctas .call-link--icon {
+    justify-content: center;
+  }
+
   .promo-mobile-ctas .button {
     min-height: 42px;
     height: auto;
@@ -2465,6 +2528,34 @@ h3 {
     display: none;
   }
 
+  .clinic-stats {
+    padding: 20px clamp(16px, 4vw, 24px);
+  }
+
+  .stat-grid--home {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    max-width: none;
+  }
+
+  .stat-card-link {
+    padding: 18px 16px;
+    text-align: center;
+  }
+
+  .stat-card-link .stat-label,
+  .stat-card-link .stat-value,
+  .stat-card-link small,
+  .stat-card-cta {
+    text-align: center;
+  }
+
+  .stat-card-link .stat-value {
+    font-size: 1.2rem;
+    line-height: 1.25;
+    white-space: normal;
+  }
+
   .sticky-actions {
     position: fixed;
     inset: auto 0 0 0;
@@ -2494,8 +2585,13 @@ h3 {
     padding: 8px 12px;
     font-size: 0.82rem;
     line-height: 1.2;
-    white-space: nowrap;
+    white-space: normal;
     text-align: center;
+    justify-content: center;
+  }
+
+  .sticky-call .call-number {
+    white-space: normal;
   }
 
   .sticky-whatsapp,
@@ -2506,9 +2602,10 @@ h3 {
     height: auto;
     padding: 8px 10px;
     font-size: 0.78rem;
-    line-height: 1.15;
+    line-height: 1.2;
     white-space: normal;
     text-align: center;
+    justify-content: center;
   }
 
   .sticky-call,
@@ -2516,10 +2613,6 @@ h3 {
   .sticky-whatsapp {
     box-shadow: none;
     border-width: 1px;
-  }
-
-  .sticky-call .call-number {
-    white-space: nowrap;
   }
 }
 
@@ -2550,9 +2643,14 @@ h3 {
 
   .top-bar,
   .clinic-gallery,
+  .clinic-stats,
   .quick-care,
   .site-footer,
   .site-header {
+    padding-inline: clamp(16px, 4vw, 24px);
+  }
+
+  .promo-carousel-controls {
     padding-inline: clamp(16px, 4vw, 24px);
   }
 
@@ -2662,6 +2760,10 @@ h3 {
   .promo-carousel-controls,
   .promo-mobile-ctas {
     padding-inline: clamp(16px, 4vw, 24px);
+  }
+
+  .promo-mobile-ctas {
+    display: none;
   }
 
   .promo-slide {
