@@ -312,29 +312,19 @@ textarea {
 }
 
 .clinic-gallery-card figcaption {
-  padding: 12px 14px;
+  padding: 10px 12px;
   color: var(--teal-dark);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 700;
   text-align: center;
 }
 
-.gallery-page .gallery-intro {
-  padding-bottom: 0;
-}
-
-.gallery-page .gallery-intro h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
-}
-
-.gallery-page .gallery-intro p:not(.eyebrow) {
-  max-width: 52ch;
-  margin: 0 auto;
-  color: var(--muted);
-}
-
 .clinic-gallery--page {
-  padding-top: clamp(24px, 4vw, 40px);
+  padding-top: 0;
+}
+
+.clinic-gallery.section {
+  padding: clamp(20px, 3vw, 32px) clamp(18px, 4vw, 58px);
 }
 
 .main-nav a[aria-current="page"] {
@@ -1034,7 +1024,8 @@ body.nav-open::before {
 .highlight-card,
 .benefit-card,
 .treatment-card,
-.testimonial-grid figure {
+.testimonial-grid figure,
+.testimonial-card {
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
@@ -1042,7 +1033,8 @@ body.nav-open::before {
 .highlight-card:hover,
 .benefit-card:hover,
 .treatment-card:hover,
-.testimonial-grid figure:hover {
+.testimonial-grid figure:hover,
+.testimonial-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 16px 36px rgba(91, 42, 115, 0.12);
 }
@@ -1654,20 +1646,16 @@ h3 {
 }
 
 .doctor-photo {
-  aspect-ratio: 1;
   overflow: hidden;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  background:
-    linear-gradient(135deg, rgba(91, 42, 115, 0.95), rgba(217, 108, 153, 0.9)),
-    var(--teal);
+  background: var(--paper);
 }
 
 .doctor-photo img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 
 .doctor-bio p {
@@ -1764,22 +1752,30 @@ h3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.testimonial-grid figure {
-  min-height: 245px;
+.testimonial-grid figure,
+.testimonial-card {
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: stretch;
+  justify-content: flex-start;
   margin: 0;
   padding: 26px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
 }
 
 .testimonial-grid blockquote {
   margin: 0;
   font-size: 1.04rem;
+  line-height: 1.55;
+  flex: 0 1 auto;
 }
 
 .testimonial-grid figcaption {
-  margin-top: 24px;
+  margin-top: auto;
+  padding-top: 12px;
   color: var(--teal-dark);
   font-weight: 900;
 }
@@ -1799,15 +1795,39 @@ h3 {
 }
 
 .testimonial-stars {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   color: #f5b301;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.08em;
   line-height: 1;
 }
 
-.testimonial-grid blockquote {
-  flex: 1 1 auto;
+.testimonial-grid--featured blockquote {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.subpage-intro {
+  margin-bottom: 16px;
+}
+
+.subpage-intro h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.15;
+}
+
+.subpage-intro p:not(.eyebrow) {
+  max-width: 42ch;
+  margin: 8px auto 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.testimonials--page {
+  padding-top: 0;
 }
 
 .testimonials-cta {
@@ -1815,29 +1835,29 @@ h3 {
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  margin-top: clamp(28px, 4vw, 40px);
-}
-
-.testimonials-page .testimonials-intro {
-  padding-bottom: 0;
-}
-
-.testimonials-page .testimonials-intro h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
-}
-
-.testimonials-page .testimonials-intro p:not(.eyebrow) {
-  max-width: 52ch;
-  margin: 0 auto;
-  color: var(--muted);
-}
-
-.testimonials--page {
-  padding-top: clamp(24px, 4vw, 40px);
+  margin-top: clamp(20px, 3vw, 28px);
 }
 
 .testimonial-grid--page {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+.testimonials-page .testimonial-grid--page .testimonial-card {
+  padding: 18px;
+}
+
+.testimonials-page .testimonial-grid--page blockquote {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.testimonials-page .testimonial-grid--page figcaption {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 700;
 }
 
 .testimonial-grid--featured {
@@ -2333,7 +2353,7 @@ h3 {
 
   .promo-carousel-controls {
     position: relative;
-    padding: 12px 16px 8px;
+    padding: 8px 16px 6px;
     background: var(--paper);
     border-top: 1px solid var(--line);
   }
@@ -2384,12 +2404,13 @@ h3 {
   }
 
   .promo-slide {
-    aspect-ratio: 2 / 1;
-    min-height: clamp(210px, 44vw, 380px);
+    aspect-ratio: 2.15 / 1;
+    min-height: clamp(150px, 38vw, 220px);
   }
 
   .promo-slide-copy {
-    padding: clamp(14px, 3vw, 24px) clamp(16px, 4vw, 32px) clamp(28px, 5vw, 38px);
+    padding: clamp(12px, 2.5vw, 18px) clamp(16px, 4vw, 28px) clamp(18px, 3.5vw, 28px);
+    gap: 6px;
   }
 
   .promo-slide strong {
@@ -2513,11 +2534,15 @@ h3 {
   .results-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .testimonial-grid--featured {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 900px) {
   body {
-    padding-bottom: calc(118px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px));
   }
 
   .top-bar {
@@ -2529,31 +2554,295 @@ h3 {
   }
 
   .clinic-stats {
-    padding: 20px clamp(16px, 4vw, 24px);
+    padding: 14px clamp(16px, 4vw, 24px);
   }
 
   .stat-grid--home {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 8px;
     max-width: none;
+    margin: 0;
   }
 
-  .stat-card-link {
-    padding: 18px 16px;
+  .stat-grid--home .stat-card-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    padding: 10px 8px;
     text-align: center;
   }
 
   .stat-card-link .stat-label,
   .stat-card-link .stat-value,
   .stat-card-link small,
-  .stat-card-cta {
+  .stat-card-link .stat-card-cta {
+    width: 100%;
     text-align: center;
   }
 
+  .stat-card-link .stat-label {
+    min-height: 2em;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
   .stat-card-link .stat-value {
-    font-size: 1.2rem;
-    line-height: 1.25;
+    margin-top: 4px;
+    font-size: clamp(0.82rem, 3.6vw, 0.95rem);
+    line-height: 1.2;
     white-space: normal;
+  }
+
+  .stat-card-link small {
+    flex: 1 1 auto;
+    margin-top: 4px;
+    font-size: 0.66rem;
+    line-height: 1.25;
+  }
+
+  .stat-card-link .stat-card-cta {
+    margin-top: auto;
+    padding-top: 6px;
+    font-size: 0.66rem;
+  }
+
+  .stat-card-highlight {
+    border-width: 1px;
+  }
+
+  .section {
+    padding: clamp(32px, 5vw, 48px) clamp(16px, 4vw, 24px);
+  }
+
+  .section-heading,
+  .section-heading-center {
+    margin-bottom: 18px;
+  }
+
+  .eyebrow {
+    margin-bottom: 8px;
+    font-size: 0.72rem;
+  }
+
+  .highlight-grid,
+  .benefit-grid,
+  .process-steps,
+  .intro-grid,
+  .treatment-grid,
+  .testimonial-grid,
+  .results-grid,
+  .quick-care-grid,
+  .faq-list {
+    gap: 10px;
+  }
+
+  .highlight-card,
+  .benefit-card,
+  .treatment-card,
+  .intro-grid article,
+  .testimonial-grid figure {
+    padding: 16px;
+  }
+
+  .highlight-tag {
+    margin-bottom: 8px;
+  }
+
+  .highlight-card strong {
+    margin-bottom: 6px;
+    font-size: 0.98rem;
+  }
+
+  .highlight-card p,
+  .benefit-card p {
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .benefit-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 10px;
+    font-size: 0.76rem;
+  }
+
+  .benefit-card h3 {
+    margin-bottom: 6px;
+    font-size: 0.98rem;
+  }
+
+  .process-steps li {
+    min-height: 0;
+    padding: 14px;
+  }
+
+  .step-num {
+    margin-bottom: 8px;
+  }
+
+  .treatment-card {
+    min-height: 0;
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 10px;
+  }
+
+  .treatment-card p {
+    margin-bottom: 10px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .quick-care {
+    padding-block: 14px;
+  }
+
+  .quick-care-card {
+    min-height: 0;
+    gap: 8px;
+  }
+
+  .clinic-stats {
+    padding-block: 10px;
+  }
+
+  .promo-marquee-track {
+    padding: 6px 0;
+  }
+
+  .doctor-bio p {
+    margin-bottom: 0.75rem;
+    line-height: 1.55;
+  }
+
+  .doctor-bio h2 {
+    margin-bottom: 0.85rem;
+  }
+
+  .doctor-subheading {
+    margin: 1rem 0 0.5rem;
+    font-size: 1rem;
+  }
+
+  .doctor-quote {
+    margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .credential-list {
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .credential-list li {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .testimonial-grid figure {
+    min-height: 0;
+  }
+
+  .testimonial-grid figcaption {
+    padding-top: 10px;
+  }
+
+  .testimonials--page {
+    padding-top: 0;
+  }
+
+  .testimonials-cta {
+    margin-top: 16px;
+    gap: 8px;
+  }
+
+  .testimonials-page .testimonials-cta {
+    display: none;
+  }
+
+  .section-heading-center {
+    margin-bottom: 14px;
+  }
+
+  .section-heading-center p:not(.eyebrow) {
+    margin-top: 6px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .testimonial-grid--page,
+  .testimonial-grid--featured {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-page .testimonial-grid--page .testimonial-card {
+    padding: 14px;
+  }
+
+  .testimonials-page .testimonial-grid--page blockquote {
+    font-size: 0.9rem;
+  }
+
+  .testimonial-tag {
+    margin-bottom: 6px;
+    padding: 4px 8px;
+    font-size: 0.68rem;
+  }
+
+  .subpage-intro {
+    margin-bottom: 12px;
+  }
+
+  .subpage-intro h1 {
+    font-size: clamp(1.45rem, 5.5vw, 1.85rem);
+  }
+
+  .subpage-intro p:not(.eyebrow) {
+    font-size: 0.86rem;
+    margin-top: 6px;
+  }
+
+  .clinic-gallery--page.section {
+    padding: clamp(16px, 3vw, 24px) clamp(16px, 4vw, 24px);
+  }
+
+  .clinic-gallery--page .clinic-gallery-grid {
+    margin-top: 0;
+  }
+
+  .clinic-gallery:not(.section) {
+    padding-block: 14px;
+  }
+
+  .faq-item {
+    padding: 14px 16px;
+  }
+
+  .contact-card {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .contact-intro-actions {
+    margin-top: 16px;
+    gap: 8px;
+  }
+
+  .site-footer {
+    padding-block: 16px;
+    gap: 8px 16px;
   }
 
   .sticky-actions {
@@ -2562,9 +2851,9 @@ h3 {
     z-index: 50;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
+    gap: 6px;
     margin: 0;
-    padding: 8px clamp(12px, 3vw, 20px) calc(8px + env(safe-area-inset-bottom, 0px));
+    padding: 6px clamp(12px, 3vw, 20px) calc(6px + env(safe-area-inset-bottom, 0px));
     opacity: 1;
     pointer-events: auto;
     transform: none;
@@ -2580,9 +2869,9 @@ h3 {
     grid-column: 1 / -1;
     flex: none;
     width: 100%;
-    min-height: 40px;
+    min-height: 36px;
     height: auto;
-    padding: 8px 12px;
+    padding: 6px 10px;
     font-size: 0.82rem;
     line-height: 1.2;
     white-space: normal;
@@ -2598,9 +2887,9 @@ h3 {
   .sticky-cta {
     flex: none;
     width: 100%;
-    min-height: 40px;
+    min-height: 36px;
     height: auto;
-    padding: 8px 10px;
+    padding: 6px 8px;
     font-size: 0.78rem;
     line-height: 1.2;
     white-space: normal;
@@ -2683,11 +2972,49 @@ h3 {
     font-size: 0.78rem;
   }
 
-  .stat-grid,
   .highlight-grid,
   .benefit-grid,
   .process-steps {
     grid-template-columns: 1fr;
+  }
+
+  .stat-grid--home {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .stat-grid--home .stat-card-link {
+    padding: 10px 6px;
+  }
+
+  .stat-card-link .stat-value {
+    font-size: clamp(0.78rem, 3.4vw, 0.9rem);
+  }
+
+  .stat-card-link small {
+    font-size: 0.64rem;
+  }
+
+  .stat-card-link .stat-card-cta {
+    padding-top: 5px;
+    font-size: 0.62rem;
+  }
+
+  .quick-care-grid {
+    align-items: stretch;
+  }
+
+  .quick-care-card {
+    height: 100%;
+    justify-content: flex-start;
+  }
+
+  .quick-care-card > span:last-child {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .contact-intro-actions .button-whatsapp {
@@ -2767,32 +3094,48 @@ h3 {
   }
 
   .promo-slide {
-    aspect-ratio: 4 / 3;
-    min-height: 180px;
+    aspect-ratio: 2.35 / 1;
+    min-height: 130px;
   }
 
   .promo-slide-copy {
-    padding: 12px clamp(16px, 4vw, 24px) 18px;
+    padding: 8px clamp(14px, 4vw, 20px) 12px;
+    gap: 4px;
   }
 
   .promo-slide strong {
-    font-size: clamp(1rem, 4.8vw, 1.25rem);
+    font-size: clamp(0.92rem, 4.2vw, 1.1rem);
+    line-height: 1.2;
+  }
+
+  .promo-tag {
+    font-size: 0.68rem;
+  }
+
+  .promo-slide-copy > span:last-child {
+    font-size: 0.76rem;
+    line-height: 1.25;
+  }
+
+  .promo-carousel-controls {
+    padding: 6px clamp(16px, 4vw, 24px) 4px;
   }
 
   .quick-care {
-    padding-block: 20px;
+    padding-block: 10px;
   }
 
   .quick-care-card {
-    min-height: 96px;
-    padding: 14px 10px;
-    font-size: 0.8rem;
+    min-height: 0;
+    padding: 10px 6px;
+    gap: 6px;
+    font-size: 0.74rem;
   }
 
   .quick-care-icon {
-    width: 36px;
-    height: 36px;
-    font-size: 0.9rem;
+    width: 34px;
+    height: 34px;
+    font-size: 0.85rem;
   }
 
   .hero {
@@ -2818,13 +3161,13 @@ h3 {
 
   .section-heading,
   .section-heading-center {
-    margin-bottom: 24px;
+    margin-bottom: 14px;
   }
 
   .section-heading p:not(.eyebrow),
   .section-heading-center p:not(.eyebrow) {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .hero-actions,
@@ -2843,7 +3186,26 @@ h3 {
     width: 100%;
   }
 
-  .quick-care-grid,
+  .quick-care-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .clinic-gallery-grid {
+    gap: 10px;
+  }
+
+  .clinic-gallery-card figcaption {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+  }
+
+  .section-heading-center h2 {
+    font-size: clamp(1.25rem, 5vw, 1.65rem);
+    line-height: 1.2;
+  }
+
   .intro-grid,
   .treatment-grid,
   .testimonial-grid,
@@ -2858,11 +3220,12 @@ h3 {
   }
 
   .doctor-photo {
-    max-width: min(260px, 100%);
+    width: min(280px, 100%);
+    max-width: 100%;
   }
 
   .section {
-    padding: clamp(40px, 8vw, 64px) clamp(16px, 4vw, 24px);
+    padding: clamp(24px, 4vw, 36px) clamp(16px, 4vw, 24px);
   }
 
   .doctor-quote {
@@ -2875,7 +3238,11 @@ h3 {
   .treatment-card,
   .intro-grid article,
   .testimonial-grid figure {
-    padding: 18px;
+    padding: 14px;
+  }
+
+  .process-steps li {
+    padding: 12px;
   }
 
   .testimonial-grid figure {
@@ -2883,17 +3250,17 @@ h3 {
   }
 
   .faq-item {
-    padding: 16px 18px;
+    padding: 12px 14px;
   }
 
   .site-footer {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 20px clamp(16px, 4vw, 24px);
+    gap: 6px;
+    padding: 14px clamp(16px, 4vw, 24px);
     justify-content: center;
     text-align: center;
-    font-size: 0.84rem;
+    font-size: 0.82rem;
   }
 
   .callback-modal-panel {
